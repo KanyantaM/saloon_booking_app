@@ -1,7 +1,7 @@
-import 'package:bloc/bloc.dart';
 import 'package:beautonomi/data/repositories/auth_repository.dart';
 import 'package:equatable/equatable.dart';
-import 'package:meta/meta.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'auth_events.dart';
 part 'auth_state.dart';
@@ -52,8 +52,11 @@ class AuthBloc extends Bloc<AuthEvent, AuthState>{
       try{
         await(authRepository.signOut());
         emit(Unauthenticated());
+      } catch(e){
+        emit(AuthError(e.toString()));
+        emit(Authenticated());
+  
       }
-    });
-  }
+  });
 }
-
+}

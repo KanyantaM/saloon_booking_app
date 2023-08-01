@@ -5,6 +5,7 @@ import 'package:beautonomi/screens/home_screen/category_screen.dart';
 import 'package:beautonomi/screens/home_screen/home_screen.dart';
 import 'package:beautonomi/screens/home_screen/my_booking_screen.dart';
 import 'package:beautonomi/utilites/constants.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -15,7 +16,7 @@ import 'bottom_navigation/bottom_try.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializApp(); //will initialize firebase in our appliation
+  await Firebase.initializeApp(); //will initialize firebase in our appliation
   SystemChrome.setSystemUIOverlayStyle(
       const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
   runApp(const MyApp());
