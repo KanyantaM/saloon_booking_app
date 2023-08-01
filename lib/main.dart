@@ -40,7 +40,7 @@ class _MyAppState extends State<MyApp> {
         return ChangeNotifierProvider<MainProvider>(
           create: (context) => MainProvider(),
           builder: (context, child) => MaterialApp(
-            title: "beautonomi",
+            title: "Hair by levy",
             theme: ThemeData(
               splashColor: kMainColor,
               unselectedWidgetColor: kSecondaryColor,
