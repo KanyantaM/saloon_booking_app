@@ -7,7 +7,7 @@ import 'dart:convert' as convert;
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:google_maps_webservice/places.dart' as places;
 
-class LocationService {
+class LocationRepository {
   final String key = 'API_KEY';
 
   Future<String> getPlaceId(String input) async {

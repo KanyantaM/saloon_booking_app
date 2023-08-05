@@ -3,15 +3,17 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
+import '../../data/repositories/googe_maps_repository.dart';
+
 part 'branch_events.dart';
 part 'branch_state.dart';
 
-class Bloc extends Bloc<AuthEvent, AuthState>{
-  final AuthRepository authRepository;
+class BranchLocationBloc extends Bloc<BranchLocationEvent, BranchLocationState>{
+  final  LocationRepository locationRepository;
 
-  AuthBloc({required this.authRepository}) : super(Unauthenticated()){
+  BranchLocationBloc({required this.locationRepository}) : super(NoSelectedBranch()){
     //When the user Presses the signin button we will send the SingInRequested event to the AuthBloc to handle it and emit theemti the Authenticated State if the user is authenticated
-    on<SignInRequested>((event,emit)async{
+    on<BranchLocationRequested>((event,emit)async{
       emit(Loading());
       try{
         await authRepository.signIn(email: event.email, password: event.password);

@@ -156,7 +156,7 @@ class MapScreenState extends State<MapScreen> {
                       '${_currentLocation.latitude},${_currentLocation.longitude}':_originController.text;
                   String shop =
                       '${_destination.latitude},${_destination.longitude}';
-                  var directions = await LocationService().getDirections(
+                  var directions = await LocationRepository().getDirections(
                     home,
                     shop,
                   );

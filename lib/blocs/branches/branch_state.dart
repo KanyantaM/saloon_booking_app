@@ -15,6 +15,10 @@ class Loaded extends BranchLocationState{
   List<Object?> get props => [];
 }
 
+class NoSelectedBranch extends BranchLocationState{
+  @override
+  List<Object?> get props => [];
+}
 
 
 // the error that occurs when state is changing
