@@ -7,27 +7,26 @@ import 'package:flutter/material.dart';
 import 'package:flutter_floating_bottom_bar/flutter_floating_bottom_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hidable/hidable.dart';
-import 'package:provider/provider.dart';
 
-import '../provider/main_provider.dart';
-import 'dart:ui' as ui;
 
 class BottomNavigationScreen extends StatefulWidget {
-  BottomNavigationScreen({
+  const BottomNavigationScreen({
     key,
   }) : super(key: key);
 
   //final String title;
 
   @override
-  _BottomNavigationScreenState createState() => _BottomNavigationScreenState();
+  BottomNavigationScreenState createState() => BottomNavigationScreenState();
 }
 
-class _BottomNavigationScreenState extends State<BottomNavigationScreen>
+class BottomNavigationScreenState extends State<BottomNavigationScreen>
     with SingleTickerProviderStateMixin {
   late int currentPage;
   late TabController tabController;
-  final List<Image> Images = [
+
+  ScrollController hideScrollCtr = ScrollController();
+  final List<Image> images = [
     Image.asset(
       "assets/Group 19135.png",
       height: 23.0,
@@ -90,88 +89,13 @@ class _BottomNavigationScreenState extends State<BottomNavigationScreen>
 
   @override
   Widget build(BuildContext context) {
-    final Color unselectedColor = Color(0xff515b60);
-
-    var provider = Provider.of<MainProvider>(context);
+    const Color unselectedColor = Color(0xff515b60);
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.only(bottom: 18.0),
         child: BottomBar(
-          child: Hidable(
-            preferredWidgetSize: Size(0, 75.h),
-            controller: provider.hideScrollCtr,
-            child: TabBar(
-              indicatorPadding: const EdgeInsets.fromLTRB(6, 0, 6, 0),
-              controller: tabController,
-              indicator: UnderlineTabIndicator(
-                  borderSide: BorderSide(color: kSecondaryColor, width: 2),
-                  insets: EdgeInsets.fromLTRB(18, 0, 16, 15)),
-              tabs: [
-                SizedBox(
-                  height: 75.h,
-                  width: 40,
-                  child: Center(
-                      child: currentPage != 0
-                          ? Images[0]
-                          : Image.asset(
-                              "assets/Group 19135.png",
-                              height: 23.0,
-                              width: 24.0,
-                            )),
-                ),
-                SizedBox(
-                  height: 75.h,
-                  width: 40,
-                  child: Center(
-                      child: currentPage != 1
-                          ? Images[1]
-                          : Image.asset(
-                              "assets/ballot.png",
-                              height: 23.0,
-                              width: 24.0,
-                            )),
-                ),
-                SizedBox(
-                  height: 75.h,
-                  width: 40,
-                  child: Center(
-                      child: currentPage != 2
-                          ? Images[2]
-                          : Image.asset(
-                              "assets/apps.png",
-                              height: 24.0,
-                              width: 24.0,
-                            )),
-                ),
-                SizedBox(
-                  height: 75.h,
-                  width: 40,
-                  child: Center(
-                      child: currentPage != 3
-                          ? Images[3]
-                          : Image.asset(
-                              "assets/bell.png",
-                              height: 24.0,
-                              width: 24.0,
-                            )),
-                ),
-                SizedBox(
-                  height: 75.h,
-                  width: 40,
-                  child: Center(
-                      child: currentPage != 4
-                          ? Images[4]
-                          : Image.asset(
-                              "assets/user.png",
-                              height: 24.0,
-                              width: 24.0,
-                            )),
-                ),
-              ],
-            ),
-          ),
           fit: StackFit.expand,
-          icon: ((width, height) => Center(
+          icon: ((width, height) => const Center(
                 child: IconButton(
                   padding: EdgeInsets.zero,
                   onPressed: null,
@@ -182,12 +106,12 @@ class _BottomNavigationScreenState extends State<BottomNavigationScreen>
                 ),
               )),
           borderRadius: BorderRadius.circular(500),
-          duration: Duration(seconds: 1),
+          duration: const Duration(seconds: 1),
 
           curve: Curves.bounceInOut,
           showIcon: false,
           width: MediaQuery.of(context).size.width * 0.9,
-          barColor: Color(0xff707070).withOpacity(0.6),
+          barColor: const Color(0xff707070).withOpacity(0.6),
           start: 2,
           end: 0,
           bottom: 10.0,
@@ -204,14 +128,88 @@ class _BottomNavigationScreenState extends State<BottomNavigationScreen>
           body: (context, controller) => TabBarView(
               controller: tabController,
               dragStartBehavior: DragStartBehavior.start,
-              physics: NeverScrollableScrollPhysics(),
-              children: [
+              physics: const NeverScrollableScrollPhysics(),
+              children: const [
                 HomeScreen(),
                 MyBookingScreen(),
                 CateGoryScreen(),
                 HomeScreen(),
                 HomeScreen(),
               ]),
+          child: Hidable(
+            preferredWidgetSize: Size(0, 75.h),
+            controller: hideScrollCtr,
+            child: TabBar(
+              indicatorPadding: const EdgeInsets.fromLTRB(6, 0, 6, 0),
+              controller: tabController,
+              indicator: const UnderlineTabIndicator(
+                  borderSide: BorderSide(color: kSecondaryColor, width: 2),
+                  insets: EdgeInsets.fromLTRB(18, 0, 16, 15)),
+              tabs: [
+                SizedBox(
+                  height: 75.h,
+                  width: 40,
+                  child: Center(
+                      child: currentPage != 0
+                          ? images[0]
+                          : Image.asset(
+                              "assets/Group 19135.png",
+                              height: 23.0,
+                              width: 24.0,
+                            )),
+                ),
+                SizedBox(
+                  height: 75.h,
+                  width: 40,
+                  child: Center(
+                      child: currentPage != 1
+                          ? images[1]
+                          : Image.asset(
+                              "assets/ballot.png",
+                              height: 23.0,
+                              width: 24.0,
+                            )),
+                ),
+                SizedBox(
+                  height: 75.h,
+                  width: 40,
+                  child: Center(
+                      child: currentPage != 2
+                          ? images[2]
+                          : Image.asset(
+                              "assets/apps.png",
+                              height: 24.0,
+                              width: 24.0,
+                            )),
+                ),
+                SizedBox(
+                  height: 75.h,
+                  width: 40,
+                  child: Center(
+                      child: currentPage != 3
+                          ? images[3]
+                          : Image.asset(
+                              "assets/bell.png",
+                              height: 24.0,
+                              width: 24.0,
+                            )),
+                ),
+                SizedBox(
+                  height: 75.h,
+                  width: 40,
+                  child: Center(
+                    child: currentPage != 4
+                        ? images[4]
+                        : Image.asset(
+                            "assets/user.png",
+                            height: 24.0,
+                            width: 24.0,
+                          ),
+                  ),
+                ),
+              ],
+            ),
+          ),
         ),
       ),
     );

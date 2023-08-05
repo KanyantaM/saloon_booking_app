@@ -2,16 +2,11 @@ import 'package:beautonomi/model/category_model.dart';
 import 'package:beautonomi/model/hair_cutting_model.dart';
 import 'package:beautonomi/model/home_screen_model.dart';
 import 'package:beautonomi/utilites/constants.dart';
-import 'package:beautonomi/widget/custom_textfield.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:provider/provider.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-import '../../provider/main_provider.dart';
 import '../../widget/category_widget.dart';
-import '../../widget/custom_button.dart';
 import '../../widget/custom_text.dart';
 import '../../widget/haid_cutting_service_widget.dart';
 import '../../widget/main_branch_widget.dart';
@@ -27,16 +22,16 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   PageController controller = PageController();
+  ScrollController hideScrollCtr = ScrollController();
 
   @override
   Widget build(BuildContext context) {
-    var provider = Provider.of<MainProvider>(context);
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
           title: Container(
-            margin: EdgeInsets.only(left: 10),
+            margin: const EdgeInsets.only(left: 10),
             child: Row(
               children: [
                 Image.asset(
@@ -44,7 +39,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   height: 23.43.h,
                 ),
                 SizedBox(
-                  width: 8.w,
+                  width: 20.w,
                 ),
                 Image.asset(
                   "assets/angle-bottom.png",
@@ -53,7 +48,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 SizedBox(
                   width: 20.w,
                 ),
-                Container(
+                SizedBox(
                   width: MediaQuery.of(context).size.width * 0.5,
                   child: CustomText(
                     title: "123 Forest Drive, Cape Town",
@@ -79,7 +74,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 // mainAxisAlignment: MainAxisAlignment.s,
                 children: [
                   Container(
-                    padding: EdgeInsets.symmetric(horizontal: 15),
+                    padding: const EdgeInsets.symmetric(horizontal: 15),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -87,7 +82,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           "assets/logo (1).png",
                           height: 35.h,
                         ),
-                        Container(
+                        SizedBox(
                           width: MediaQuery.of(context).size.width * 0.3,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -97,12 +92,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                 height: 22.h,
                                 color: kSecondaryColor,
                               ),
-                              Icon(
+                              const Icon(
                                 Icons.favorite,
                                 size: 24,
                                 color: kSecondaryColor,
                               ),
-                              Icon(
+                              const Icon(
                                 Icons.message,
                                 size: 24,
                                 color: kSecondaryColor,
@@ -121,7 +116,7 @@ class _HomeScreenState extends State<HomeScreen> {
         body: Container(
           child: ListView(
             padding: EdgeInsets.zero,
-            controller: provider.hideScrollCtr,
+            controller: hideScrollCtr,
             children: [
               SizedBox(
                 height: 20.h,
@@ -141,20 +136,20 @@ class _HomeScreenState extends State<HomeScreen> {
               SizedBox(
                 height: 20.h,
               ),
-              Container(
+              SizedBox(
                 height: 190.h,
                 child: Stack(
                   children: [
                     PageView.builder(
                       controller: controller,
                       scrollDirection: Axis.horizontal,
-                      physics: ClampingScrollPhysics(),
+                      physics: const ClampingScrollPhysics(),
                       // shrinkWrap: true,
                       // padding: EdgeInsets.symmetric(horizontal: 6),
                       itemCount: homeList.length,
                       itemBuilder: (context, index) {
                         return Container(
-                            margin: EdgeInsets.only(left: 15),
+                            margin: const EdgeInsets.only(left: 15),
                             child: MainWorkWidget(
                               homeScreenModel: homeList[index],
                             ));
@@ -167,11 +162,11 @@ class _HomeScreenState extends State<HomeScreen> {
                         Align(
                           alignment: Alignment.center,
                           child: Container(
-                            margin: EdgeInsets.only(bottom: 15),
+                            margin: const EdgeInsets.only(bottom: 15),
                             child: SmoothPageIndicator(
                               controller: controller, // PageController
                               count: homeList.length,
-                              effect: WormEffect(
+                              effect: const WormEffect(
                                   dotHeight: 12,
                                   dotWidth: 12,
                                   dotColor: kGreyColor,
@@ -216,7 +211,7 @@ class _HomeScreenState extends State<HomeScreen> {
               //   height: 20.h,
               // ),
               Container(
-                margin: EdgeInsets.symmetric(horizontal: 20),
+                margin: const EdgeInsets.symmetric(horizontal: 20),
                 child: CustomText(
                   title: "Category",
                   // "Main Branch",
@@ -229,17 +224,17 @@ class _HomeScreenState extends State<HomeScreen> {
               SizedBox(
                 height: 20.h,
               ),
-              Container(
+              SizedBox(
                 height: 150.h,
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
-                  physics: ClampingScrollPhysics(),
+                  physics: const ClampingScrollPhysics(),
                   shrinkWrap: true,
-                  padding: EdgeInsets.symmetric(horizontal: 6),
+                  padding: const EdgeInsets.symmetric(horizontal: 6),
                   itemCount: categoryList.length,
                   itemBuilder: (context, index) {
                     return Container(
-                        margin: EdgeInsets.only(left: 15),
+                        margin: const EdgeInsets.only(left: 15),
                         child: CategoryWidget(
                           cateGoryModel: category[index],
                         ));
@@ -250,7 +245,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 height: 20.h,
               ),
               Container(
-                margin: EdgeInsets.symmetric(horizontal: 20),
+                margin: const EdgeInsets.symmetric(horizontal: 20),
                 child: CustomText(
                   title: "Top Specialist",
                   // "Main Branch",
@@ -263,18 +258,18 @@ class _HomeScreenState extends State<HomeScreen> {
               SizedBox(
                 height: 20.h,
               ),
-              Container(
+              SizedBox(
                 height: 380.h,
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
-                  physics: ClampingScrollPhysics(),
+                  physics: const ClampingScrollPhysics(),
                   shrinkWrap: true,
-                  padding: EdgeInsets.symmetric(horizontal: 6),
+                  padding: const EdgeInsets.symmetric(horizontal: 6),
                   itemCount: categoryList.length,
                   itemBuilder: (context, index) {
                     return Container(
-                      margin: EdgeInsets.only(left: 15),
-                      child: TopSpecialistWidget(),
+                      margin: const EdgeInsets.only(left: 15),
+                      child: const TopSpecialistWidget(),
                     );
                   },
                 ),
@@ -283,7 +278,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 height: 20.h,
               ),
               Container(
-                margin: EdgeInsets.symmetric(horizontal: 20),
+                margin: const EdgeInsets.symmetric(horizontal: 20),
                 child: CustomText(
                   title: "Hair Cutting Services",
                   // "Main Branch",
@@ -296,17 +291,17 @@ class _HomeScreenState extends State<HomeScreen> {
               SizedBox(
                 height: 20.h,
               ),
-              Container(
+              SizedBox(
                 height: 220.h,
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
-                  physics: ClampingScrollPhysics(),
+                  physics: const ClampingScrollPhysics(),
                   shrinkWrap: true,
-                  padding: EdgeInsets.symmetric(horizontal: 6),
+                  padding: const EdgeInsets.symmetric(horizontal: 6),
                   itemCount: hairCuttingList.length,
                   itemBuilder: (context, index) {
                     return Container(
-                      margin: EdgeInsets.only(left: 15),
+                      margin: const EdgeInsets.only(left: 15),
                       child: HairCuttingServiceWidget(
                         hairCuttingModel: hairCutting[index],
                       ),

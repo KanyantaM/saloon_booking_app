@@ -10,6 +10,11 @@ class Helper {
     return MediaQuery.of(context).size.height * height;
   }
 
+  static toPopScreen(context) {
+    Navigator.popUntil(
+        context,  (route) => false);
+  }
+
   static toRemoveUntiScreen(context, screen) {
     Navigator.pushAndRemoveUntil(
         context, SlideRightToLeft(page: screen), (route) => false);
@@ -23,7 +28,7 @@ class Helper {
     Navigator.push(context, SlideRightToLeft(page: screen));
   }
 
-  static toReplacementScreen(context, screen) {
+  static toReplacementScreenLeft(context, screen) {
     Navigator.pushReplacement(context, SlideRightToLeft(page: screen));
   }
 

@@ -1,12 +1,15 @@
-import 'package:beautonomi/bottom_navigation/bottom_try.dart';
 import 'package:beautonomi/screens/auth/log_in_bottomsheet.dart';
-import 'package:beautonomi/screens/auth/sign_in_bottomsheet.dart';
+import 'package:beautonomi/screens/auth/sign_up_bottomsheet.dart';
 import 'package:beautonomi/utilites/constants.dart';
-import 'package:beautonomi/utilites/helper.dart';
 import 'package:beautonomi/widget/custom_button.dart';
 import 'package:beautonomi/widget/custom_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../../blocs/auth/auth_bloc.dart';
+import '../../bottom_navigation/bottom_try.dart';
+import '../../utilites/helper.dart';
 
 class AuthScreen extends StatelessWidget {
   const AuthScreen({Key? key}) : super(key: key);
@@ -15,7 +18,23 @@ class AuthScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      body: Container(
+      body: BlocConsumer<AuthBloc, AuthState>(listener: (context, state){
+        if(state is Authenticated){
+          //navigate to the dashboard screen if the user is authenticated
+          Helper.toScreen(context, const BottomNavigationScreen());
+        }
+        if(state is AuthError){
+          //Displaying the error message if the user is not authenticated
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(state.error)));
+        }
+      }, builder: (context, state){
+        if(state is Loading){
+          //Display the loading indicator while the user is signing up
+          //TODO: finding something better than the famous circular progress indicator
+          return const Center(child: CircularProgressIndicator(),);
+        }
+        if(state is Unauthenticated){
+          return Container(
         decoration: const BoxDecoration(
             image: DecorationImage(
                 image: AssetImage("assets/bg.png"), fit: BoxFit.cover)),
@@ -44,7 +63,7 @@ class AuthScreen extends StatelessWidget {
                     btnColor: kSecondaryColor,
                     title: "Login",
                     onPressed: () {
-                      _onButtonPressed(context, const LoginBottomsheet());
+                      _onButtonPressed(context, const SignInBottomSheet());
                     },
                     textColor: kMainColor,
                     fontWeight: FontWeight.w400,
@@ -56,7 +75,7 @@ class AuthScreen extends StatelessWidget {
                   ),
                   InkWell(
                     onTap: () {
-                      _onButtonPressed(context, const SigninBottomsheet());
+                      _onButtonPressed(context, const SignUpBottomSheet());
                     },
                     child: Container(
                       height: 67.h,
@@ -82,10 +101,12 @@ class AuthScreen extends StatelessWidget {
               ),
             ],
           ),
-        ),
+        ));
+        }
+        return Container();
+      }) 
         // child: Image.asset("assets/"),
-      ),
-    );
+      );
   }
 
   void _onButtonPressed(BuildContext context, Widget task) {
@@ -115,3 +136,5 @@ class AuthScreen extends StatelessWidget {
     );
   }
 }
+
+

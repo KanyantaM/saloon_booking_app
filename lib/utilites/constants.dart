@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
+//colours
 const kMainColor = Color(0xFFFFFFFF);
 const kSecondaryColor = Color(0xFFFF0077);
 const kPinkLightColor = Color(0xFFFFEEF6);
@@ -32,3 +34,11 @@ const kTextGreyColor = Color(0xFF919191);
 // const kRatingColor = Color(0xFFCBD5E1);
 // const kMsgBgColor = Color(0xFFEDEDED);
 // const kGreyBgColor = Color(0xFFF5F5F5);
+
+//locations
+const Map<String, LatLng> branches = {
+  'Lusaka MainBranch': LatLng(
+    -15.4089, //Latitude
+    28.2871, //Longitude
+  ),
+};

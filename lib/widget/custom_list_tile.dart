@@ -1,25 +1,27 @@
-import 'package:expansion_tile_card/expansion_tile_card.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../utilites/constants.dart';
 import '../../widget/custom_text.dart';
-import '../../widget/custom_textfield.dart';
-import '../../widget/expanded_list_tile_widget.dart';
 
 class CustomLisTileWidget extends StatelessWidget {
-  const CustomLisTileWidget({
+  const CustomLisTileWidget({super.key, 
     this.title,
+    this.onTap,
   });
 
-  final title;
+  final dynamic title;
+  final Function? onTap;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
+        const Divider(
+          color: kMainColor,
+        ),
         ListTile(
-          visualDensity: VisualDensity(
+          onTap: ()=>onTap,
+          visualDensity: const VisualDensity(
             vertical: -4,
           ),
           title: CustomText(
@@ -30,9 +32,7 @@ class CustomLisTileWidget extends StatelessWidget {
             fontWeight: FontWeight.w400,
           ),
         ),
-        Divider(
-          color: kMainColor,
-        )
+      
       ],
     );
   }

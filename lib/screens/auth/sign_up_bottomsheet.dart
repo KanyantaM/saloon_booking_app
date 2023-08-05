@@ -3,7 +3,8 @@ import 'package:beautonomi/utilites/constants.dart';
 import 'package:beautonomi/utilites/helper.dart';
 import 'package:beautonomi/widget/custom_text.dart';
 import 'package:beautonomi/widget/custom_textfield.dart';
-// import 'package:country_code_picker/country_code_picker.dart';
+import 'package:beautonomi/widget/input_field.dart';
+import 'package:country_code_picker/country_code_picker.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -13,14 +14,14 @@ import '../../blocs/auth/auth_bloc.dart';
 import '../../widget/custom_botto_login_widget.dart';
 import '../../widget/custom_button.dart';
 
-class SignInBottomSheet extends StatefulWidget {
-  const SignInBottomSheet({super.key});
+class SignUpBottomSheet extends StatefulWidget {
+  const SignUpBottomSheet({super.key});
 
   @override
-  State<SignInBottomSheet> createState() => _SignInBottomSheetState();
+  State<SignUpBottomSheet> createState() => _SignUpBottomSheetState();
 }
 
-class _SignInBottomSheetState extends State<SignInBottomSheet> {
+class _SignUpBottomSheetState extends State<SignUpBottomSheet> {
   final _formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
@@ -52,7 +53,7 @@ class _SignInBottomSheetState extends State<SignInBottomSheet> {
             child: Container(
               margin: const EdgeInsets.only(right: 40),
               child: CustomText(
-                title: "SignIn",
+                title: "Sign up",
                 color: kBlackColor,
                 fontSize: 18,
                 fontWeight: FontWeight.w500,
@@ -89,37 +90,53 @@ class _SignInBottomSheetState extends State<SignInBottomSheet> {
                             : null;
                       },
                     ),
-                    // SizedBox(
-                    //   height: 12.h,
-                    // ),
-                    // CustomTextField(
-                    //   controller: _phoneController,
-                    //   fillColor: kGreyLightColor,
-                    //   isFilled: true,
-                    //   hintText: "number",
-                    //   hintFontSize: 14.h,
-                    //   textFontSize: 14.h,
-                    //   cursorColor: kBlackColor,
-                    //   hintTextColor: kGreyDarkColor,
-                    //   prefixIcon: const CountryCodePicker(),
-                    //   keyboardType: TextInputType.phone,
-                    // ),
-                    // SizedBox(
-                    //   height: 12.h,
-                    // ),
+                    SizedBox(
+                      height: 12.h,
+                    ),
                     CustomTextField(
-                      obscureText: true,
+                      controller: _phoneController,
+                      fillColor: kGreyLightColor,
+                      isFilled: true,
+                      hintText: "number",
+                      hintFontSize: 14.h,
+                      textFontSize: 14.h,
+                      cursorColor: kBlackColor,
+                      hintTextColor: kGreyDarkColor,
+                      prefixIcon: const CountryCodePicker(),
+                      keyboardType: TextInputType.phone,
+                    ),
+                    SizedBox(
+                      height: 12.h,
+                    ),
+                    CustomTextField(
                       controller: _passwordController,
                       fillColor: kGreyLightColor,
                       isFilled: true,
-                      hintText: "password",
+                      hintText: "create password",
                       hintFontSize: 14.h,
                       textFontSize: 14.h,
                       cursorColor: kBlackColor,
                       hintTextColor: kGreyDarkColor,
                       prefixIcon: const Icon(Icons.password),
                       validation: (value) => value != null && value.length <= 6
-                          ? 'enter a valid password'
+                          ? 'enter a min of 6 characters'
+                          : null,
+                    ),
+                    SizedBox(
+                      height: 12.h,
+                    ),
+                    CustomTextField(
+                      controller: _passwordController,
+                      fillColor: kGreyLightColor,
+                      isFilled: true,
+                      hintText: "re-enter password",
+                      hintFontSize: 14.h,
+                      textFontSize: 14.h,
+                      cursorColor: kBlackColor,
+                      hintTextColor: kGreyDarkColor,
+                      prefixIcon: const Icon(Icons.password),
+                      validation: (value) => value != null && value != _passwordController.text
+                          ? 'passwords do not match'
                           : null,
                     ),
                     SizedBox(
@@ -129,7 +146,7 @@ class _SignInBottomSheetState extends State<SignInBottomSheet> {
                       btnHeight: 51.h,
                       onPressed: () {
                         try {
-                          _authenticateWithEmailAndPassword(context);
+                          _createAccountWithEmailAndPassword(context);
                           Helper.toScreen(
                               context, const BottomNavigationScreen());
                         } catch (e) {
@@ -140,7 +157,7 @@ class _SignInBottomSheetState extends State<SignInBottomSheet> {
                         }
                       },
                       btnColor: kSecondaryColor,
-                      title: "Sign In",
+                      title: "Sign up",
                       textColor: kMainColor,
                       fontWeight: FontWeight.w400,
                       fontSize: 15,
@@ -202,10 +219,10 @@ class _SignInBottomSheetState extends State<SignInBottomSheet> {
     );
   }
 
-  void _authenticateWithEmailAndPassword(BuildContext context) {
+  void _createAccountWithEmailAndPassword(BuildContext context) {
     if (_formKey.currentState!.validate()) {
       BlocProvider.of<AuthBloc>(context).add(
-        SignInRequested(_emailController.text, _passwordController.text),
+        SignUpRequested(_emailController.text, _passwordController.text),
       );
     }
   }

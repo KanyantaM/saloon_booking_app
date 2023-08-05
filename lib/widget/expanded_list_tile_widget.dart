@@ -4,8 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../utilites/constants.dart';
 import '../../widget/custom_text.dart';
-import '../../widget/custom_textfield.dart';
-import '../screens/home_screen/category_screen.dart';
 import 'custom_list_tile.dart';
 
 class ExpandedListTileWidget extends StatelessWidget {
@@ -14,12 +12,15 @@ class ExpandedListTileWidget extends StatelessWidget {
     required this.hairList,
     this.title,
     this.image,
+    this.icon,
+    this.secondaryColor,
   });
 
   final List hairList;
   String? title;
-
-  final image;
+  final Icon? icon;
+  final String? image;
+  final bool? secondaryColor;
 
   @override
   Widget build(BuildContext context) {
@@ -32,8 +33,8 @@ class ExpandedListTileWidget extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
         // contentPadding: EdgeInsets.zero,
         // contentPadding: EdgeInsets.symmetric(horizontal: 20),
-        baseColor: Color(0xffFF0077),
-        expandedColor: Color(0xffFF0479),
+        baseColor: const Color(0xffFF0077),
+        expandedColor: const Color(0xffFF0479),
         leading: Container(
           height: 45.h,
           width: 45.w,
@@ -41,7 +42,7 @@ class ExpandedListTileWidget extends StatelessWidget {
               borderRadius: BorderRadius.circular(100), color: kMainColor),
           child: Center(
               child: Image.asset(
-            image,
+            image!,
             // "assets/Group 19121.png",
             height: 22.h,
           )),
@@ -63,12 +64,13 @@ class ExpandedListTileWidget extends StatelessWidget {
         children: [
           ListView.builder(
             scrollDirection: Axis.vertical,
-            physics: ClampingScrollPhysics(),
+            physics: const ClampingScrollPhysics(),
             shrinkWrap: true,
-            padding: EdgeInsets.symmetric(horizontal: 6),
+            padding: const EdgeInsets.symmetric(horizontal: 6),
             itemCount: hairList.length,
             itemBuilder: (context, index) {
               return CustomLisTileWidget(
+                // onTap: ,
                 title: hairList[index],
               );
             },
