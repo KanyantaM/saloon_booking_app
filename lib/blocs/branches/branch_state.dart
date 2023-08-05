@@ -1,32 +1,26 @@
-part of 'branch_bloc.dart';
+import 'package:equatable/equatable.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-@immutable
-abstract class BranchLocationState extends Equatable{}
-
-//when the user presses sign in or signup the state is changed from loading to authenticated
-class Loading extends BranchLocationState{
+abstract class BranchState extends Equatable {
   @override
   List<Object?> get props => [];
 }
 
-//when the branch has loaded, state is changed to authenticated
-class Loaded extends BranchLocationState{
-  @override
-  List<Object?> get props => [];
-}
+class BranchInitialState extends BranchState {}
 
-class NoSelectedBranch extends BranchLocationState{
-  @override
-  List<Object?> get props => [];
-}
+class BranchUpdatedState extends BranchState {
+  final LatLng currentLocation;
+  final LatLng destination;
+  final Set<Marker> markers;
+  final Set<Polyline> polylines;
 
-
-// the error that occurs when state is changing
-class BranchLocationError extends BranchLocationState{
-  final String error;
-
-  BranchLocationError(this.error);
+  BranchUpdatedState({
+    required this.currentLocation,
+    required this.destination,
+    required this.markers,
+    required this.polylines,
+  });
 
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [currentLocation, destination, markers, polylines];
 }
