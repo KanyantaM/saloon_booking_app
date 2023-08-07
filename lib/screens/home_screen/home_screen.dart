@@ -304,7 +304,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     Container(
                       margin: const EdgeInsets.symmetric(horizontal: 20),
                       child: CustomText(
-                        title: "Top Specialist",
+                        title: _filter == ''? "Top Specialists" : '$_filter specialists',
                         // "Main Branch",
                         color: kBlackColor,
                         fontSize: 17.h,
