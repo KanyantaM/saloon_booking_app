@@ -1,5 +1,6 @@
 import 'package:geolocator/geolocator.dart';
 import 'package:geocoding/geocoding.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 ///Determine the current position of the device.
 ///
@@ -58,7 +59,7 @@ Future<Position?> determineLastPostion() async {
 }
 
 ///Next we need to convert the the latitude and longitude to words, this is called reverse geocoding
-Future<String> myLocation(Position location) async {
+Future<String> myLocation(LatLng location) async {
   double latitude = location.latitude;
   double longitude = location.longitude;
 
@@ -71,5 +72,9 @@ Future<String> myLocation(Position location) async {
     return '$address, $subCity, $city';
   }
   return '';
+}
+
+double getDistanceBetweenCoordinates(LatLng origin, LatLng destination){
+  return Geolocator.distanceBetween(origin.latitude, origin.longitude, destination.latitude, destination.longitude);
 }
 

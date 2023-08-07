@@ -8,6 +8,18 @@ abstract class BranchState extends Equatable {
 
 class BranchInitialState extends BranchState {}
 
+class UseCurrentLocationState extends BranchState{
+  
+  @override
+  List<Object?> get props => [];
+}
+
+class DontUseCurrentLocationState extends BranchState{
+  
+  @override
+  List<Object?> get props => [];
+}
+
 class BranchUpdatedState extends BranchState {
   final LatLng currentLocation;
   final LatLng destination;

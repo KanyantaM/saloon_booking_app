@@ -1,3 +1,4 @@
+
 import 'package:equatable/equatable.dart';
 
 abstract class BranchEvent extends Equatable {
@@ -6,5 +7,9 @@ abstract class BranchEvent extends Equatable {
 }
 
 class ChangeLocationEvent extends BranchEvent {}
+
+class ChangeBranchEvent extends BranchEvent{}
+
+class UseCurrentLocation extends BranchEvent{}
 
 class SearchEvent extends BranchEvent {}

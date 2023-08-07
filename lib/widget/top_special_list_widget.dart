@@ -1,28 +1,34 @@
-import 'package:beautonomi/model/category_model.dart';
-import 'package:beautonomi/model/hair_cutting_model.dart';
-import 'package:beautonomi/model/home_screen_model.dart';
 import 'package:beautonomi/utilites/constants.dart';
-import 'package:beautonomi/widget/custom_textfield.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:provider/provider.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-import '../../provider/main_provider.dart';
 import '../../widget/custom_button.dart';
 import '../../widget/custom_text.dart';
-import '../../widget/haid_cutting_service_widget.dart';
-import '../../widget/main_work_widget.dart';
 
 class TopSpecialistWidget extends StatelessWidget {
   const TopSpecialistWidget({
     super.key,
+    required this.profileImage,
+    required this.biography,
+    required this.rating,
+    required this.totalRating,
+    required this.saloonImage,
+    required this.name,
+    required this.minCost,
+    required this.distance,
   });
+  final String profileImage;
+  final String biography;
+  final double rating;
+  final int totalRating;
+  final String saloonImage;
+  final String name;
+  final double minCost;
+  final double distance;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 400.h,
       width: MediaQuery.of(context).size.width * 0.75,
       child: Card(
@@ -31,7 +37,7 @@ class TopSpecialistWidget extends StatelessWidget {
         child: Column(
           // crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Container(
+            SizedBox(
               width: MediaQuery.of(context).size.width * 0.75,
               height: 130.h,
               child: ClipRRect(
@@ -39,8 +45,8 @@ class TopSpecialistWidget extends StatelessWidget {
                   topLeft: Radius.circular(10),
                   topRight: Radius.circular(10),
                 ),
-                child: Image.asset(
-                  "assets/special_one.png",
+                child: Image.network(
+                  profileImage,
                   fit: BoxFit.cover,
                 ),
               ),
@@ -65,8 +71,8 @@ class TopSpecialistWidget extends StatelessWidget {
                             ),
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(100),
-                              child: Image.asset(
-                                "assets/Ellipse 16.png",
+                              child: Image.network(
+                                saloonImage,
                                 fit: BoxFit.cover,
                               ),
                             ),
@@ -105,25 +111,27 @@ class TopSpecialistWidget extends StatelessWidget {
                       color: kSecondaryColor,
                     ),
                     width: MediaQuery.of(context).size.width * 0.4,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Image.asset(
-                          "assets/circle-star.png",
-                          height: 15.h,
-                        ),
-                        SizedBox(
-                          width: 15.w,
-                        ),
-                        CustomText(
-                          title: "Top Rated",
-                          color: kMainColor,
-                          fontSize: 10.h,
-                          fontWeight: FontWeight.w500,
-                          maxLines: 1,
-                        ),
-                      ],
-                    ),
+                    child: rating > 4
+                        ? Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Image.asset(
+                                "assets/circle-star.png",
+                                height: 15.h,
+                              ),
+                              SizedBox(
+                                width: 15.w,
+                              ),
+                              CustomText(
+                                title: "Top Rated",
+                                color: kMainColor,
+                                fontSize: 10.h,
+                                fontWeight: FontWeight.w500,
+                                maxLines: 1,
+                              ),
+                            ],
+                          )
+                        : null,
                   ),
                 ),
               ],
@@ -132,7 +140,7 @@ class TopSpecialistWidget extends StatelessWidget {
               height: 25.h,
             ),
             Container(
-              margin: EdgeInsets.symmetric(horizontal: 15),
+              margin: const EdgeInsets.symmetric(horizontal: 15),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
@@ -140,7 +148,7 @@ class TopSpecialistWidget extends StatelessWidget {
                     title: Row(
                       children: [
                         CustomText(
-                          title: "Jay Mendez",
+                          title: name,
                           color: kBlackColor,
                           fontSize: 12.h,
                           fontWeight: FontWeight.w600,
@@ -155,7 +163,7 @@ class TopSpecialistWidget extends StatelessWidget {
                         ),
                       ],
                     ),
-                    trailing: Container(
+                    trailing: SizedBox(
                       width: 100.w,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -170,28 +178,15 @@ class TopSpecialistWidget extends StatelessWidget {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                RatingBar.builder(
-                                  initialRating: 3,
-                                  minRating: 1,
-                                  itemSize: 15.h,
-                                  direction: Axis.horizontal,
-                                  allowHalfRating: true,
-                                  itemCount: 1,
-                                  itemPadding: const EdgeInsets.symmetric(
-                                      horizontal: 0.0),
-                                  itemBuilder: (context, _) => const Icon(
-                                    Icons.star,
-                                    color: Colors.amber,
-                                  ),
-                                  onRatingUpdate: (rating) {
-                                    print(rating);
-                                  },
+                                const Icon(
+                                  Icons.star,
+                                  color: Colors.amber,
                                 ),
                                 SizedBox(
                                   width: 3.w,
                                 ),
                                 CustomText(
-                                  title: "(5.0)",
+                                  title: "($rating)",
                                   color: kBlackColor,
                                   fontSize: 8.h,
                                   fontWeight: FontWeight.w500,
@@ -201,7 +196,7 @@ class TopSpecialistWidget extends StatelessWidget {
                             ),
                           ),
                           CustomText(
-                            title: "5,721",
+                            title: totalRating.toString(),
                             color: kBlackColor,
                             fontSize: 10.h,
                             fontWeight: FontWeight.w500,
@@ -213,8 +208,7 @@ class TopSpecialistWidget extends StatelessWidget {
                     contentPadding: EdgeInsets.zero,
                   ),
                   CustomText(
-                    title:
-                        "It is a long established fact that a reader will be distracted by the readable content of a page",
+                    title: biography,
                     color: kTextDarkColor,
                     fontSize: 12.h,
                     fontWeight: FontWeight.w500,
@@ -233,7 +227,7 @@ class TopSpecialistWidget extends StatelessWidget {
                           width: 15.w,
                         ),
                         CustomText(
-                          title: "R 100",
+                          title: 'K $minCost',
                           color: kBlackColor,
                           fontSize: 12.h,
                           fontWeight: FontWeight.w600,
@@ -242,13 +236,13 @@ class TopSpecialistWidget extends StatelessWidget {
                       ],
                     ),
                     contentPadding: EdgeInsets.zero,
-                    trailing: Container(
+                    trailing: SizedBox(
                       width: 100,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           CustomText(
-                            title: "2 KM",
+                            title: '$distance km',
                             color: kBlackColor,
                             fontSize: 12.h,
                             fontWeight: FontWeight.w600,
@@ -272,7 +266,9 @@ class TopSpecialistWidget extends StatelessWidget {
                     btnHeight: 45.h,
                     btnColor: kSecondaryColor,
                     title: "Book Now",
-                    onPressed: () {},
+                    onPressed: () {
+                      //TODO: go to booking screen
+                    },
                     textColor: kMainColor,
                     fontWeight: FontWeight.w400,
                     fontSize: 12,

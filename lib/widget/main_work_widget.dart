@@ -1,6 +1,6 @@
-import 'package:beautonomi/model/category_model.dart';
-import 'package:beautonomi/model/hair_cutting_model.dart';
-import 'package:beautonomi/model/home_screen_model.dart';
+import 'package:beautonomi/model/ui_model/category_model.dart';
+import 'package:beautonomi/model/ui_model/hair_cutting_model.dart';
+import 'package:beautonomi/model/ui_model/home_screen_model.dart';
 import 'package:beautonomi/utilites/constants.dart';
 import 'package:beautonomi/widget/custom_textfield.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +19,7 @@ class MainWorkWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 184.h,
       width: MediaQuery.of(context).size.width * 0.8,
       child: ClipRRect(

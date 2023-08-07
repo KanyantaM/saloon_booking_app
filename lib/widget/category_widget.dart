@@ -1,33 +1,25 @@
-import 'package:beautonomi/model/category_model.dart';
-import 'package:beautonomi/model/hair_cutting_model.dart';
-import 'package:beautonomi/model/home_screen_model.dart';
 import 'package:beautonomi/utilites/constants.dart';
-import 'package:beautonomi/widget/custom_textfield.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:provider/provider.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-import '../../provider/main_provider.dart';
-import '../../widget/custom_button.dart';
 import '../../widget/custom_text.dart';
-import '../../widget/haid_cutting_service_widget.dart';
-import '../../widget/main_work_widget.dart';
-import '../../widget/top_special_list_widget.dart';
+import '../model/category.dart';
 
 class CategoryWidget extends StatelessWidget {
-  final CateGoryModel? cateGoryModel;
+  final CateGory cateGoryModel;
+  final int index;
+  final bool isSelected;
+  
 
-  const CategoryWidget({Key? key, this.cateGoryModel}) : super(key: key);
+  const CategoryWidget({Key? key, required this.cateGoryModel, required this.index, required this.isSelected}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
-        color: kPinkLightColor,
+        color: isSelected?kPinkLightColor:kSecondaryColor,
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -43,8 +35,7 @@ class CategoryWidget extends StatelessWidget {
               ),
               child: Center(
                 child: Image.asset(
-                  cateGoryModel!.image,
-                  // "assets/Group 19134.png",
+                  cateGoryModel.image,
                   height: 45.h,
                 ),
               ),
@@ -54,9 +45,7 @@ class CategoryWidget extends StatelessWidget {
             height: 12.h,
           ),
           CustomText(
-            title: cateGoryModel!.title,
-            // "Make-up",
-            // "Main Branch",
+            title: cateGoryModel.title,
             color: kBlackColor,
             fontSize: 12.h,
             fontWeight: FontWeight.w600,

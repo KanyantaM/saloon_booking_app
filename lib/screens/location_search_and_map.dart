@@ -35,7 +35,7 @@ class MapScreenState extends State<MapScreen> {
 
   bool _useCurrentLocation = false;
 
-  LatLng _currentLocation=LatLng(-15, 28.3);
+  LatLng _currentLocation=const LatLng(-15, 28.3);
 
   // int _polygonIdCounter = 1;
   int _polylineIdCounter = 1;
