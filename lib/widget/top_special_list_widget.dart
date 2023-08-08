@@ -4,25 +4,16 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../widget/custom_button.dart';
 import '../../widget/custom_text.dart';
+import '../model/baber.dart';
 
 class TopSpecialistWidget extends StatelessWidget {
   const TopSpecialistWidget({
     super.key,
-    required this.profileImage,
-    required this.biography,
-    required this.rating,
-    required this.totalRating,
-    required this.saloonImage,
-    required this.name,
+    required this.baber,
     required this.minCost,
     required this.distance,
   });
-  final String profileImage;
-  final String biography;
-  final double rating;
-  final int totalRating;
-  final String saloonImage;
-  final String name;
+  final Baber baber;
   final double minCost;
   final double distance;
 
@@ -46,7 +37,7 @@ class TopSpecialistWidget extends StatelessWidget {
                   topRight: Radius.circular(10),
                 ),
                 child: Image.network(
-                  profileImage,
+                  baber.profileURL,
                   fit: BoxFit.cover,
                 ),
               ),
@@ -72,7 +63,7 @@ class TopSpecialistWidget extends StatelessWidget {
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(100),
                               child: Image.network(
-                                saloonImage,
+                                baber.saloon,
                                 fit: BoxFit.cover,
                               ),
                             ),
@@ -111,7 +102,7 @@ class TopSpecialistWidget extends StatelessWidget {
                       color: kSecondaryColor,
                     ),
                     width: MediaQuery.of(context).size.width * 0.4,
-                    child: rating > 4
+                    child: (baber.totalRating/baber.reviewCount) > 4
                         ? Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -148,7 +139,7 @@ class TopSpecialistWidget extends StatelessWidget {
                     title: Row(
                       children: [
                         CustomText(
-                          title: name,
+                          title: baber.name,
                           color: kBlackColor,
                           fontSize: 12.h,
                           fontWeight: FontWeight.w600,
@@ -186,7 +177,7 @@ class TopSpecialistWidget extends StatelessWidget {
                                   width: 3.w,
                                 ),
                                 CustomText(
-                                  title: "($rating)",
+                                  title: "(${(baber.totalRating/baber.reviewCount)})",
                                   color: kBlackColor,
                                   fontSize: 8.h,
                                   fontWeight: FontWeight.w500,
@@ -196,7 +187,7 @@ class TopSpecialistWidget extends StatelessWidget {
                             ),
                           ),
                           CustomText(
-                            title: totalRating.toString(),
+                            title: baber.totalRating.toString(),
                             color: kBlackColor,
                             fontSize: 10.h,
                             fontWeight: FontWeight.w500,
@@ -208,7 +199,7 @@ class TopSpecialistWidget extends StatelessWidget {
                     contentPadding: EdgeInsets.zero,
                   ),
                   CustomText(
-                    title: biography,
+                    title: baber.bio,
                     color: kTextDarkColor,
                     fontSize: 12.h,
                     fontWeight: FontWeight.w500,
@@ -268,6 +259,7 @@ class TopSpecialistWidget extends StatelessWidget {
                     title: "Book Now",
                     onPressed: () {
                       //TODO: go to booking screen
+                      _onButtonPressed(context, ShowServiceBottomSheetsWidget(baber: baber));
                     },
                     textColor: kMainColor,
                     fontWeight: FontWeight.w400,
@@ -280,6 +272,32 @@ class TopSpecialistWidget extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+  void _onButtonPressed(BuildContext context, Widget task) {
+    showModalBottomSheet(
+      backgroundColor: kMainColor,
+      context: context,
+      shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+        topLeft: Radius.circular(25),
+        topRight: Radius.circular(25),
+      )),
+      builder: (BuildContext _) {
+        return Container(
+          height: 400,
+          margin: EdgeInsets.only(top: 10.h),
+          decoration: const BoxDecoration(
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(25),
+              topRight: Radius.circular(25),
+            ),
+            color: kMainColor,
+          ),
+          child: task,
+        );
+      },
+      isScrollControlled: true,
     );
   }
 }

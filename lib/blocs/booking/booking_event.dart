@@ -10,6 +10,14 @@ abstract class BookingEvent extends Equatable {
 
 class FetchBookings extends BookingEvent {}
 
+class AddServices extends BookingEvent{
+  final Map<String, double> services;
+
+  AddServices(this.services);
+  @override
+  List<Object?> get props => [services];
+}
+
 class AddBooking extends BookingEvent {
   final Appointment newBooking;
 
