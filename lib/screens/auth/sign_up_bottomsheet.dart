@@ -3,7 +3,6 @@ import 'package:beautonomi/utilites/constants.dart';
 import 'package:beautonomi/utilites/helper.dart';
 import 'package:beautonomi/widget/custom_text.dart';
 import 'package:beautonomi/widget/custom_textfield.dart';
-import 'package:beautonomi/widget/input_field.dart';
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';

@@ -349,13 +349,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   child: Padding(
                                     padding: const EdgeInsets.all(8.0),
                                     child: TopSpecialistWidget(
-                                      profileImage: baber.name,
-                                      biography: baber.bio,
-                                      rating:
-                                          baber.totalRating / baber.reviewCount,
-                                      totalRating: baber.totalRating,
-                                      saloonImage: baber.saloon,
-                                      name: baber.name,
+                                      baber:baber,
                                       minCost: minPrice,
                                       distance: getDistanceBetweenCoordinates(
                                           branchState.currentLocation,
@@ -388,13 +382,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   child: Padding(
                                     padding: const EdgeInsets.all(8.0),
                                     child: TopSpecialistWidget(
-                                      profileImage: baber.name,
-                                      biography: baber.bio,
-                                      rating:
-                                          baber.totalRating / baber.reviewCount,
-                                      totalRating: baber.totalRating,
-                                      saloonImage: baber.saloon,
-                                      name: baber.name,
+                                      baber: baber,
                                       minCost: minPrice,
                                       distance: getDistanceBetweenCoordinates(
                                           branchState.currentLocation,

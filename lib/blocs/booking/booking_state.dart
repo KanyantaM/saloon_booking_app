@@ -9,6 +9,14 @@ abstract class BookingState extends Equatable {
   List<Object?> get props => [];
 }
 
+class VerifingSelectedServices extends BookingState{}
+
+class VerifiedSelectedServices extends BookingState{}
+
+class VerficationServicesError extends BookingState{}
+
+
+
 class BookingInitial extends BookingState {}
 
 class BookingLoaded extends BookingState {
