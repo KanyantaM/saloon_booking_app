@@ -1,7 +1,10 @@
 import 'package:beautonomi/data/repositories/auth_repository.dart';
+import 'package:beautonomi/model/client.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../data/repositories/crud_repository.dart';
 
 part 'auth_events.dart';
 part 'auth_state.dart';
@@ -27,6 +30,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState>{
       emit (Loading());
       try{
         await authRepository.signUP(email: event.email, password: event.password);
+        addNewUserToFirestore(Client(phone: event.phone, email: event.email));
         emit(Authenticated());
       } catch(e){
         emit(AuthError(e.toString()));

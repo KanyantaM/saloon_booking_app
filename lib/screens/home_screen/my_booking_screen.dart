@@ -1,6 +1,5 @@
 import 'package:beautonomi/utilites/constants.dart';
 import 'package:beautonomi/widget/custom_text.dart';
-import 'package:bubble_tab_indicator/bubble_tab_indicator.dart';
 import 'package:buttons_tabbar/buttons_tabbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -39,14 +38,14 @@ class MyBookingScreen extends StatelessWidget {
                 // Customize the appearance and behavior of the tab bar
                 backgroundColor: kSecondaryColor,
                 // borderWidth: 2,
-                contentPadding: EdgeInsets.symmetric(horizontal: 20),
+                contentPadding: const EdgeInsets.symmetric(horizontal: 20),
                 unselectedBackgroundColor: kMainColor,
                 // borderColor: Colors.black,
-                labelStyle: TextStyle(
+                labelStyle: const TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
                 ),
-                unselectedLabelStyle: TextStyle(
+                unselectedLabelStyle: const TextStyle(
                   color: kGreyColor,
                   fontWeight: FontWeight.bold,
                 ),
@@ -67,7 +66,7 @@ class MyBookingScreen extends StatelessWidget {
                 ],
               ),
             ),
-            Expanded(
+            const Expanded(
               flex: 2,
               child: TabBarView(
                 children: [

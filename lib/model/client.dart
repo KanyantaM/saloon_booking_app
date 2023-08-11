@@ -1,14 +1,25 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class Client {
-  late String name;
   late String? id;
   late String email;
-  late String password;
-  late String? profilePhoto;
+  late String phone;
 
   Client(
-      {required this.name,
+      {required this.phone,
       required this.email,
-      required this.password,
-      this.id,
-      this.profilePhoto});
+      this.id,});
+
+      Client.fromFirestore({required DocumentSnapshot documentSnapshot}) {
+    id = documentSnapshot.id;
+    email = documentSnapshot.get('email');
+    phone = documentSnapshot.get('phone');
+  }
+
+  Map<String, dynamic> toFirestore() {
+    return {
+      'phone' : phone,
+      'email' : email,
+    };
+  }
 }

@@ -1,5 +1,7 @@
 import 'package:beautonomi/screens/auth/auth_screen.dart';
+import 'package:beautonomi/screens/home_screen/home_screen.dart';
 import 'package:beautonomi/utilites/constants.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -60,7 +62,14 @@ class MyAppState extends State<MyApp> {
             ),
             debugShowMaterialGrid: false,
             debugShowCheckedModeBanner: false,
-            home: const AuthScreen(),
+            home: StreamBuilder<User?>(stream: FirebaseAuth.instance.authStateChanges(),
+            builder: ((context, snapshot) {
+              if(snapshot.hasData){
+                return const HomeScreen();
+              } else{
+                return const AuthScreen();
+              }
+            }),) 
           );
         },
         designSize: const Size(428, 926),

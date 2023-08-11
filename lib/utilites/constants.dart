@@ -42,3 +42,7 @@ const Map<String, LatLng> branches = {
     28.2871, //Longitude
   ),
 };
+
+
+//service duration
+int serviceDuration = 60;

@@ -221,7 +221,7 @@ class _SignUpBottomSheetState extends State<SignUpBottomSheet> {
   void _createAccountWithEmailAndPassword(BuildContext context) {
     if (_formKey.currentState!.validate()) {
       BlocProvider.of<AuthBloc>(context).add(
-        SignUpRequested(_emailController.text, _passwordController.text),
+        SignUpRequested(_emailController.text, _passwordController.text,_phoneController.text,),
       );
     }
   }

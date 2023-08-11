@@ -10,11 +10,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../blocs/booking/booking_bloc.dart';
 import '../blocs/booking/booking_event.dart';
 import '../model/baber.dart';
+import '../model/client.dart';
 
 class ShowServiceBottomSheetsWidget extends StatefulWidget {
   final Baber baber;
-  final BookingRepository bookingRepository = BookingRepository();
-  ShowServiceBottomSheetsWidget({super.key, required this.baber});
+  final Client user;
+  const ShowServiceBottomSheetsWidget({super.key, required this.baber, required this.user});
 
   @override
   State<ShowServiceBottomSheetsWidget> createState() => _ShowServiceBottomSheetsWidgetState();
@@ -34,7 +35,7 @@ class _ShowServiceBottomSheetsWidgetState extends State<ShowServiceBottomSheetsW
   @override
   Widget build(BuildContext context) {
     return BlocProvider<BookingBloc>(
-      create: (create) => BookingBloc(widget.bookingRepository),
+      create: (create) => BookingBloc(),
       child: BlocConsumer(
           builder: (context, state) {
             if (state is ServicesNotSelected) {

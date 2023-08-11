@@ -1,5 +1,9 @@
+import 'package:beautonomi/data/repositories/crud_repository.dart';
+import 'package:beautonomi/model/client.dart';
 import 'package:beautonomi/utilites/constants.dart';
+import 'package:beautonomi/utilites/user_details.dart';
 import 'package:beautonomi/widget/show_services_bottom_sheet.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -17,9 +21,12 @@ class TopSpecialistWidget extends StatelessWidget {
   final Baber baber;
   final double minCost;
   final double distance;
+  
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) {  
+    settingser();
+    Client client =user;     
     return SizedBox(
       height: 400.h,
       width: MediaQuery.of(context).size.width * 0.75,
@@ -259,7 +266,7 @@ class TopSpecialistWidget extends StatelessWidget {
                     btnColor: kSecondaryColor,
                     title: "Book Now",
                     onPressed: () {
-                      _onButtonPressed(context, ShowServiceBottomSheetsWidget(baber: baber));
+                      _onButtonPressed(context, ShowServiceBottomSheetsWidget(baber: baber, user: client,));
                     },
                     textColor: kMainColor,
                     fontWeight: FontWeight.w400,
