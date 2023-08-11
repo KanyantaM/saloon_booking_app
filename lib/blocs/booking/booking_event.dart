@@ -1,6 +1,5 @@
 import 'package:equatable/equatable.dart';
 
-import '../../model/appointment.dart';
 import '../../model/baber.dart';
 
 // Define the Bloc events
@@ -22,11 +21,4 @@ class AddServices extends BookingEvent{
   List<Object?> get props => [selectedServices];
 }
 
-class AddBooking extends BookingEvent {
-  final Appointment newBooking;
 
-  AddBooking(this.newBooking);
-
-  @override
-  List<Object?> get props => [newBooking];
-}
