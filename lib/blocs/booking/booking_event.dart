@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 
 import '../../model/appointment.dart';
+import '../../model/baber.dart';
 
 // Define the Bloc events
 abstract class BookingEvent extends Equatable {
@@ -11,11 +12,14 @@ abstract class BookingEvent extends Equatable {
 class FetchBookings extends BookingEvent {}
 
 class AddServices extends BookingEvent{
-  final Map<String, double> services;
+  final Baber baber;
+  final Map<String, double> selectedServices;
 
-  AddServices(this.services);
+  final bool isSubset = true;
+
+  AddServices(this.selectedServices, this.baber);
   @override
-  List<Object?> get props => [services];
+  List<Object?> get props => [selectedServices];
 }
 
 class AddBooking extends BookingEvent {

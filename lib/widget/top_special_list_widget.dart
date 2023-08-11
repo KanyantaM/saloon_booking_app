@@ -1,4 +1,5 @@
 import 'package:beautonomi/utilites/constants.dart';
+import 'package:beautonomi/widget/show_services_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -258,7 +259,6 @@ class TopSpecialistWidget extends StatelessWidget {
                     btnColor: kSecondaryColor,
                     title: "Book Now",
                     onPressed: () {
-                      //TODO: go to booking screen
                       _onButtonPressed(context, ShowServiceBottomSheetsWidget(baber: baber));
                     },
                     textColor: kMainColor,
