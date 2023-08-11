@@ -35,6 +35,14 @@ class BookingBloc extends Bloc<BookingEvent, BookingState> {
       } catch (e) {
         yield BookingError("Error adding booking");
       }
+    } else if(event is AddServices){
+      if(event.selectedServices.isEmpty){
+        yield VerficationServicesError('No service selected\nPlease select a service');
+      } else if(event.baber.services.keys.toSet().containsAll(event.selectedServices.keys)){
+        yield VerifiedSelectedServices();
+      } else {
+        yield VerficationServicesError('Invalid Entry');
+      }
     }
   }
 
