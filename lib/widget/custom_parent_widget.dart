@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 
 class CustomParentWidget extends StatelessWidget {
-  CustomParentWidget({this.child, Key? key}) : super(key: key);
-  Widget? child;
-  final GlobalKey<ScaffoldState> _mainDrawerKey = GlobalKey<ScaffoldState>();
+  const CustomParentWidget({required this.child, Key? key}) : super(key: key);
+  final Widget? child;
 
   @override
   Widget build(BuildContext context) {

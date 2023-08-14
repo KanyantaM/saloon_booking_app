@@ -1,62 +1,78 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-
-class Appointment {
+class Appointment{
+  ///
+  /// The userId of the currently logged user
+  /// who will start the new booking
   final String? userId;
+
+  /// The userName of the currently logged user
+  /// who will start the new booking
   final String? userName;
-  final String? baberId;
-  final String? branchId;
-  final Map<String, double>? services;
-  final double servicePrice;
-  final DateTime? bookingStart;
-  final DateTime? bookingEnd;
-  final String? userContact;
-  final String? branchName;
-  final String? baberName;
+
+  /// The userEmail of the currently logged user
+  /// who will start the new booking
+  final String? userEmail;
+
+  /// The userPhoneNumber of the currently logged user
+  /// who will start the new booking
+  final String? userPhoneNumber;
+
+  /// The id of the currently selected Service
+  /// for this service will the user start the new booking
+
+  final String? serviceId;
+
+  ///The name of the currently selected Service
+  final String serviceName;
+
+  ///The duration of the currently selected Service
+
+  final int serviceDuration;
+
+  ///The price of the currently selected Service
+
+  final double? servicePrice;
+
+  ///The selected booking slot's starting time
+  DateTime bookingStart;
+
+  ///The selected booking slot's ending time
+  DateTime bookingEnd;
 
   Appointment({
+    this.userEmail,
+    this.userPhoneNumber,
     this.userId,
     this.userName,
-    this.baberId,
-    this.branchId,
-    this.services,
-    this.servicePrice = 0.0,
-    this.bookingStart,
-    this.bookingEnd,
-    this.userContact,
-    this.branchName,
-    this.baberName,
+    required this.bookingStart,
+    required this.bookingEnd,
+    this.serviceId,
+    required this.serviceName,
+    required this.serviceDuration,
+    this.servicePrice,
   });
 
-  factory Appointment.fromFirestore(DocumentSnapshot doc) {
-    final data = doc.data() as Map<String, dynamic>;
-    return Appointment(
-      userId: data['userId'],
-      userName: data['userName'],
-      baberId: data['baberId'],
-      branchId: data['branchId'],
-      services: data['services'],
-      servicePrice: data['servicePrice'],
-      bookingStart: data['bookingStart']?.toDate(),
-      bookingEnd: data['bookingEnd']?.toDate(),
-      userContact: data['userContact'],
-      branchName: data['branchName'],
-      baberName: data['baberName'],
-    );
-  }
+  Appointment.fromJson(Map<String, dynamic> json)
+      : userEmail = json['userEmail'] as String?,
+        userPhoneNumber = json['userPhoneNumber'] as String?,
+        userId = json['userId'] as String?,
+        userName = json['userName'] as String?,
+        bookingStart = DateTime.parse(json['bookingStart'] as String),
+        bookingEnd = DateTime.parse(json['bookingEnd'] as String),
+        serviceId = json['serviceId'] as String?,
+        serviceName = json['serviceName'] as String,
+        serviceDuration = json['serviceDuration'] as int,
+        servicePrice = json['servicePrice'] as double?;
 
-  Map<String, dynamic> toJson() {
-    return {
-      'userId': userId,
-      'userName': userName,
-      'baberId': baberId,
-      'branchId': branchId,
-      'services': services,
-      'servicePrice': servicePrice,
-      'bookingStart': bookingStart,
-      'bookingEnd': bookingEnd,
-      'userContact': userContact,
-      'branchName': branchName,
-      'baberName': baberName,
-    };
-  }
+  Map<String, dynamic> toJson() => {
+        'userId': userId,
+        'userName': userName,
+        'userEmail': userEmail,
+        'userPhoneNumber': userPhoneNumber,
+        'serviceId': serviceId,
+        'serviceName': serviceName,
+        'serviceDuration': serviceDuration,
+        'servicePrice': servicePrice,
+        'bookingStart': bookingStart.toIso8601String(),
+        'bookingEnd': bookingEnd.toIso8601String(),
+      };
 }

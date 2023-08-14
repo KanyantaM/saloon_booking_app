@@ -7,7 +7,7 @@ import 'custom_inkwell_btn.dart';
 
 
 class CustomButtonLoginWidget extends StatelessWidget {
-  CustomButtonLoginWidget({ 
+  const CustomButtonLoginWidget({ 
     required this.icon,
     required this.title,
     this.onPressed, Key? key
@@ -16,7 +16,7 @@ class CustomButtonLoginWidget extends StatelessWidget {
 
   final String icon;
   final String title;
-  Function? onPressed;
+  final Function? onPressed;
 
   @override
   Widget build(BuildContext context) {

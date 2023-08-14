@@ -3,7 +3,7 @@ import 'custom_inkwell_btn.dart';
 import 'custom_text.dart';
 
 class CustomButton extends StatelessWidget {
-  CustomButton(
+  const CustomButton(
       {this.onPressed,
       this.btnHeight,
       this.btnWidth,
@@ -18,18 +18,18 @@ class CustomButton extends StatelessWidget {
       this.elevation,
       Key? key})
       : super(key: key);
-  Function? onPressed;
-  double? btnHeight;
-  double? btnWidth;
-  Color? btnColor;
-  double? elevation;
-  double? btnBorderWidth;
-  Color? btnBorderColor;
-  double? btnRadius;
-  String? title;
-  Color? textColor;
-  double? fontSize;
-  FontWeight? fontWeight;
+  final Function? onPressed;
+  final double? btnHeight;
+  final double? btnWidth;
+  final Color? btnColor;
+  final double? elevation;
+  final double? btnBorderWidth;
+  final Color? btnBorderColor;
+  final double? btnRadius;
+  final String? title;
+  final Color? textColor;
+  final double? fontSize;
+  final FontWeight? fontWeight;
 
   @override
   Widget build(BuildContext context) {

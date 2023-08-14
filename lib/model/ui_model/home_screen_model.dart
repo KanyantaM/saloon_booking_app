@@ -1,12 +1,12 @@
 class HomeScreenModel {
   const HomeScreenModel({
-    this.image,
+   required this.image,
   });
 
-  final image;
+  final String image;
 }
 
-List<HomeScreenModel> home = [
+List<HomeScreenModel> home = const [
   HomeScreenModel(
     image: "assets/Rectangle 13.png",
   ),

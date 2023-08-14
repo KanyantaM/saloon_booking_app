@@ -1,7 +1,10 @@
 import 'package:beautonomi/model/category.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import '../../model/client.dart';
+
+final String userID = FirebaseAuth.instance.currentUser!.uid;
 
 final CollectionReference baberCollection =
     FirebaseFirestore.instance.collection('babers');
@@ -22,11 +25,11 @@ await userCollection.doc(id).delete();
 }
 
 void addNewUserToFirestore(Client client) async {
-  await categoriesCollection.add(client.toFirestore());
+  await userCollection.doc(userID).set(client.toFirestore());
 }
 
-Future<Client> getUserFromFirestore(String id) async{
-  final documentSnapshot = await userCollection.doc(id).get();
+Future<Client> getUserFromFirestore() async{
+  final documentSnapshot = await userCollection.doc(userID).get();
       return Client.fromFirestore(documentSnapshot: documentSnapshot);
 }
 

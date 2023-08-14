@@ -1,6 +1,5 @@
 import 'package:beautonomi/blocs/crud/baber/baber_bloc.dart';
 import 'package:beautonomi/blocs/crud/baber/baber_state.dart';
-import 'package:beautonomi/model/ui_model/hair_cutting_model.dart';
 import 'package:beautonomi/model/ui_model/home_screen_model.dart';
 import 'package:beautonomi/utilites/constants.dart';
 import 'package:beautonomi/utilites/location/finding_user.dart';
@@ -16,7 +15,6 @@ import '../../model/baber.dart';
 import '../../model/category.dart';
 import '../../widget/category_widget.dart';
 import '../../widget/custom_text.dart';
-import '../../widget/haid_cutting_service_widget.dart';
 import '../../widget/main_branch_widget.dart';
 import '../../widget/main_work_widget.dart';
 import '../../widget/top_special_list_widget.dart';
@@ -416,24 +414,6 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     SizedBox(
                       height: 20.h,
-                    ),
-                    SizedBox(
-                      height: 220.h,
-                      child: ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        physics: const ClampingScrollPhysics(),
-                        shrinkWrap: true,
-                        padding: const EdgeInsets.symmetric(horizontal: 6),
-                        itemCount: hairCuttingList.length,
-                        itemBuilder: (context, index) {
-                          return Container(
-                            margin: const EdgeInsets.only(left: 15),
-                            child: HairCuttingServiceWidget(
-                              hairCuttingModel: hairCutting[index],
-                            ),
-                          );
-                        },
-                      ),
                     ),
                     SizedBox(
                       height: 20.h,

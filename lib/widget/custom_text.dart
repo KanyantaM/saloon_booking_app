@@ -1,9 +1,8 @@
-import 'dart:ffi';
 
 import 'package:flutter/material.dart';
 
 class CustomText extends StatelessWidget {
-  CustomText(
+  const CustomText(
       {this.title,
       this.color,
       this.fontSize,
@@ -16,16 +15,16 @@ class CustomText extends StatelessWidget {
       this.fontFamily,
       Key? key})
       : super(key: key);
-  String? title;
-  Color? color;
-  double? fontSize;
-  FontWeight? fontWeight;
-  FontStyle? fontStyle;
-  TextAlign? textAlign;
-  TextDecoration? decoration;
-  int? maxLines;
-  String? fontFamily;
-  double? lineHeight;
+  final String? title;
+  final Color? color;
+  final double? fontSize;
+  final FontWeight? fontWeight;
+  final FontStyle? fontStyle;
+  final TextAlign? textAlign;
+  final TextDecoration? decoration;
+  final int? maxLines;
+  final String? fontFamily;
+  final double? lineHeight;
 
   @override
   Widget build(BuildContext context) {

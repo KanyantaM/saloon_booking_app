@@ -8,7 +8,11 @@ abstract class BranchEvent extends Equatable {
 
 class ChangeLocationEvent extends BranchEvent {}
 
-class ChangeBranchEvent extends BranchEvent{}
+class ChangeBranchEvent extends BranchEvent{
+  final int branchIndex;
+
+  ChangeBranchEvent(this.branchIndex);
+}
 
 class UseCurrentLocation extends BranchEvent{}
 

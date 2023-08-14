@@ -51,7 +51,7 @@ class _SignInBottomSheetState extends State<SignInBottomSheet> {
           title: Center(
             child: Container(
               margin: const EdgeInsets.only(right: 40),
-              child: CustomText(
+              child:const CustomText(
                 title: "SignIn",
                 color: kBlackColor,
                 fontSize: 18,

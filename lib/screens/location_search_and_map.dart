@@ -217,7 +217,7 @@ class MapScreenState extends State<MapScreen> {
           size: 22.h,
         )),
       ),
-      title: CustomText(
+      title: const CustomText(
         title: 'Select a branch',
         // "Facial",
         color: kMainColor,

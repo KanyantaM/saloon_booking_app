@@ -1,5 +1,4 @@
 import 'package:beautonomi/blocs/booking/booking_state.dart';
-import 'package:beautonomi/utilites/booking/booking.dart';
 import 'package:beautonomi/utilites/constants.dart';
 import 'package:beautonomi/widget/custom_button.dart';
 import 'package:beautonomi/widget/custom_text.dart';
@@ -23,6 +22,7 @@ class ShowServiceBottomSheetsWidget extends StatefulWidget {
 
 class _ShowServiceBottomSheetsWidgetState extends State<ShowServiceBottomSheetsWidget> {
   double _totalCost = 0;
+  // ignore: prefer_final_fields
   Map<String, double> _selectedServices = {};
   bool _checked = false;
 
@@ -164,7 +164,7 @@ class _ShowServiceBottomSheetsWidgetState extends State<ShowServiceBottomSheetsW
                     btnColor: kGreenColor,
                     title: "Book",
                     onPressed: () {
-                      //TODO: go to the nest page where the customer is able to make a booking.
+                      BlocProvider.of<BookingBloc>(context).add(AddServices(_selectedServices, widget.baber));
                     },
                     textColor: kMainColor,
                     fontWeight: FontWeight.w400,

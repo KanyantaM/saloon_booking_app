@@ -14,7 +14,7 @@ import '../../utilites/location/finding_user.dart';
 
 
 // Business Logic - BLoC
-
+//TODO make the destinations better mweh
 
 class BranchBloc extends Bloc<BranchEvent, BranchState> {
   final Completer<GoogleMapController> _controller = Completer();
@@ -78,7 +78,7 @@ class BranchBloc extends Bloc<BranchEvent, BranchState> {
   void _setMarker(LatLng point) {
     _markers.add(
       Marker(
-        markerId: MarkerId('marker'),
+        markerId: MarkerId(branches.keys.first),
         position: point,
       ),
     );

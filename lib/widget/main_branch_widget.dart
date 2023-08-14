@@ -4,24 +4,24 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../widget/custom_text.dart';
 
 class MainBranchWidget extends StatelessWidget {
-  const MainBranchWidget({
-    this.image,
-    this.title,
+  const MainBranchWidget({super.key, 
+    required this.image,
+    required this.title,
   });
 
-  final image;
-  final title;
+  final String image;
+  final String title;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       // width: MediaQuery.of(context).size.width*0.3,
-      margin: EdgeInsets.only(left: 15),
+      margin: const EdgeInsets.only(left: 15),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Container(
-            padding: EdgeInsets.all(5),
+            padding: const EdgeInsets.all(5),
             height: 81.h,
             width: 81.w,
             decoration: BoxDecoration(

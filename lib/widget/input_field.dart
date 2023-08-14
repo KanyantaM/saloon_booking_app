@@ -4,21 +4,21 @@ import '../utilites/constants.dart';
 // prefix textfield
 
 class InputField extends StatelessWidget {
-  InputField({
-    this.txt,
-    this.number,
+  const InputField({super.key, 
+    required this.txt,
+    required this.number,
     this.obscureText,
-    this.control,
+    required this.control,
     this.prefix,
     this.suffix,
   });
 
-  final txt;
-  final number;
-  final control;
-  Widget? prefix;
-  Widget? suffix;
-  bool? obscureText;
+  final String txt;
+  final TextInputType number;
+  final TextEditingController control;
+  final Widget? prefix;
+  final Widget? suffix;
+  final bool? obscureText;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +28,7 @@ class InputField extends StatelessWidget {
       child: TextFormField(
         controller: control,
         keyboardType: number,
-        style: TextStyle(
+        style:const TextStyle(
           color: kBlackColor,
           fontWeight: FontWeight.w400,
           fontSize: 16,

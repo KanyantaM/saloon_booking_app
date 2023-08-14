@@ -1,4 +1,3 @@
-import 'package:expansion_tile_card/expansion_tile_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -22,7 +21,7 @@ class _CateGoryScreenState extends State<CateGoryScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: kMainColor,
-        title: CustomText(
+        title: const CustomText(
           title: "Category",
           fontSize: 20,
           fontWeight: FontWeight.w600,
@@ -32,7 +31,7 @@ class _CateGoryScreenState extends State<CateGoryScreen> {
         centerTitle: true,
       ),
       body: Container(
-        margin: EdgeInsets.symmetric(horizontal: 20),
+        margin: const EdgeInsets.symmetric(horizontal: 20),
         child: ListView(
           children: [
             SizedBox(

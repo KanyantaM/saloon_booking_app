@@ -37,8 +37,8 @@ class BookingBloc extends Bloc<BookingEvent, BookingState> {
     List<DateTimeRange> convertedBookings = [];
     for (var booking in bookings) {
       convertedBookings.add(DateTimeRange(
-        start: booking.bookingStart!,
-        end: booking.bookingEnd!,
+        start: booking.bookingStart,
+        end: booking.bookingEnd,
       ));
     }
     return convertedBookings;

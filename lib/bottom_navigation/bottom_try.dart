@@ -129,12 +129,12 @@ class BottomNavigationScreenState extends State<BottomNavigationScreen>
               controller: tabController,
               dragStartBehavior: DragStartBehavior.start,
               physics: const NeverScrollableScrollPhysics(),
-              children: const [
-                HomeScreen(),
+              children:  [
+                const HomeScreen(),
                 MyBookingScreen(),
-                CateGoryScreen(),
-                HomeScreen(),
-                HomeScreen(),
+                const CateGoryScreen(),
+                const HomeScreen(),
+                const HomeScreen(),
               ]),
           child: Hidable(
             preferredWidgetSize: Size(0, 75.h),

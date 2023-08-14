@@ -7,7 +7,7 @@ import '../../widget/custom_text.dart';
 import 'custom_list_tile.dart';
 
 class ExpandedListTileWidget extends StatelessWidget {
-  ExpandedListTileWidget({
+  const ExpandedListTileWidget({
     super.key,
     required this.hairList,
     this.title,
@@ -17,7 +17,7 @@ class ExpandedListTileWidget extends StatelessWidget {
   });
 
   final List hairList;
-  String? title;
+  final String? title;
   final Icon? icon;
   final String? image;
   final bool? secondaryColor;

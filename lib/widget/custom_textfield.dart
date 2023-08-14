@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import '../utilites/constants.dart';
 
 class CustomTextField extends StatelessWidget {
-  CustomTextField(
+  const CustomTextField(
       {this.obscureText,
       this.focusNode,
       this.onChanged,
@@ -42,42 +41,42 @@ class CustomTextField extends StatelessWidget {
       this.fontFamily,
       Key? key})
       : super(key: key);
-  bool? obscureText;
-  String? Function(String?)? validation;
-  Function(String)? onChanged;
-  Function? onTap;
-  FocusNode? focusNode;
-  TextEditingController? controller;
-  TextInputType? keyboardType;
+  final bool? obscureText;
+  final String? Function(String?)? validation;
+  final Function(String)? onChanged;
+  final Function? onTap;
+  final FocusNode? focusNode;
+  final TextEditingController? controller;
+  final TextInputType? keyboardType;
 
-  String? hintText;
-  String? initialValue;
-  bool? isFilled;
-  bool? isUnderlineInputBorder;
-  bool? isOutlineInputBorder;
-  Color? isOutlineInputBorderColor;
-  int? maxLength;
-  int? maxLines;
-  double? fontSize;
-  int? inputFormatter;
-  Color? fillColor;
-  Color? cursorColor;
-  Color? fieldborderColor;
-  Color? textColor;
-  Color? hintTextColor;
-  double? textFontSize;
-  double? hintFontSize;
-  double? fieldborderRadius;
-  double? contentPaddingTop;
-  double? contentPaddingBottom;
-  double? contentPaddingLeft;
-  double? contentPaddingRight;
-  TextAlign? textAlign;
-  Widget? prefixIcon;
-  Widget? suffixIcon;
-  FontWeight? hintFontWeight;
-  FontWeight? textFontWeight;
-  String? fontFamily;
+  final String? hintText;
+  final String? initialValue;
+  final bool? isFilled;
+  final bool? isUnderlineInputBorder;
+  final bool? isOutlineInputBorder;
+  final Color? isOutlineInputBorderColor;
+  final int? maxLength;
+  final int? maxLines;
+  final double? fontSize;
+  final int? inputFormatter;
+  final Color? fillColor;
+  final Color? cursorColor;
+  final Color? fieldborderColor;
+  final Color? textColor;
+  final Color? hintTextColor;
+  final double? textFontSize;
+  final double? hintFontSize;
+  final double? fieldborderRadius;
+  final double? contentPaddingTop;
+  final double? contentPaddingBottom;
+  final double? contentPaddingLeft;
+  final double? contentPaddingRight;
+  final TextAlign? textAlign;
+  final Widget? prefixIcon;
+  final Widget? suffixIcon;
+  final FontWeight? hintFontWeight;
+  final FontWeight? textFontWeight;
+  final String? fontFamily;
 
   @override
   Widget build(BuildContext context) {
@@ -151,7 +150,7 @@ class CustomTextField extends StatelessWidget {
                   isOutlineInputBorder == false
               ? InputBorder.none
               : isOutlineInputBorder == false
-                  ? UnderlineInputBorder(
+                  ? const UnderlineInputBorder(
                       borderSide: BorderSide(width: 1, color: Colors.black))
                   : OutlineInputBorder(
                       borderSide: BorderSide(

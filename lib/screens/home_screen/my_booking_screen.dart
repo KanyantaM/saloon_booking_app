@@ -7,7 +7,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'myBooking_tab/all_tab.dart';
 
 class MyBookingScreen extends StatelessWidget {
-  const MyBookingScreen({Key? key}) : super(key: key);
+  MyBookingScreen({Key? key}) : super(key: key);
+  final List<String> tabs = ['All', 'Awaiting', 'Confirmed', 'Started'];
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +16,7 @@ class MyBookingScreen extends StatelessWidget {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: kMainColor,
-        title: CustomText(
+        title:const CustomText(
           title: "My Bookings",
           fontSize: 20,
           fontWeight: FontWeight.w600,
@@ -50,18 +51,18 @@ class MyBookingScreen extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                 ),
                 // Add your tabs here
-                tabs: const [
+                tabs: [
                   Tab(
-                    text: "All",
+                    text: tabs[0],
                   ),
                   Tab(
-                    text: "Awaiting",
+                    text: tabs[1],
                   ),
                   Tab(
-                    text: "Confirmed",
+                    text: tabs[2],
                   ),
                   Tab(
-                    text: "Started",
+                    text: tabs[3],
                   ),
                 ],
               ),
@@ -70,10 +71,10 @@ class MyBookingScreen extends StatelessWidget {
               flex: 2,
               child: TabBarView(
                 children: [
-                  AllTabScreen(),
-                  AllTabScreen(),
-                  AllTabScreen(),
-                  AllTabScreen(),
+                  AllTabScreen(screen: 0,),
+                  AllTabScreen(screen: 1,),
+                  AllTabScreen(screen: 2,),
+                  AllTabScreen(screen: 3,),
                 ],
                 // children: ...,
               ),
