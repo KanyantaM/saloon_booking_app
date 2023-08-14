@@ -50,19 +50,17 @@ List<DateTimeRange> convertStreamResultToFirebase(
 //this is for the my bookings
 Future<Stream<List<Appointment>>> getAllMyBookingStreamFirebase(
     {required DateTime end, required DateTime start, required userID, required int section}) async{
-   if(section == 1){
-  return  getBookingStream(placeId: branches.keys.toList()[0])
+      Query<Appointment> appointmentQuery = getBookingStream(placeId: branches.keys.toList()[0])
       .where('bookingStart', isGreaterThanOrEqualTo: start)
       .where('bookingStart', isLessThanOrEqualTo: end)
-      .where('userId', isEqualTo: userID)
+      .where('userId', isEqualTo: userID);
+   if(section == 1){
+  return  appointmentQuery
       .where('confirmed', isEqualTo: false )
       .snapshots()
       .map((querySnapshot)=> querySnapshot.docs.map((e) => e.data()).toList());
 }else if(section == 2){
-  return  getBookingStream(placeId: branches.keys.toList()[0])
-      .where('bookingStart', isGreaterThanOrEqualTo: start)
-      .where('bookingStart', isLessThanOrEqualTo: end)
-      .where('userId', isEqualTo: userID)
+  return  appointmentQuery
       .where('confirmed', isEqualTo: true )
       .snapshots()
       .map((querySnapshot)=> querySnapshot.docs.map((e) => e.data()).toList());
@@ -76,10 +74,7 @@ Future<Stream<List<Appointment>>> getAllMyBookingStreamFirebase(
       .map((querySnapshot)=> querySnapshot.docs.map((e) => e.data()).toList());
 } else
 {
-  return  getBookingStream(placeId: branches.keys.toList()[0])
-      .where('bookingStart', isGreaterThanOrEqualTo: start)
-      .where('bookingStart', isLessThanOrEqualTo: end)
-      .where('userId', isEqualTo: userID)
+  return  appointmentQuery
       .snapshots()
       .map((querySnapshot)=> querySnapshot.docs.map((e) => e.data()).toList());
 }
