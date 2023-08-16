@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "447775354482",
+    "project_id": "beutonomi",
+    "storage_bucket": "beutonomi.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:447775354482:android:70cce29678effc47a91ceb",
+        "android_client_info": {
+          "package_name": "com.app.beautonomi"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "447775354482-i17uma919r2nkpcmk5uv2op8vig0vsmg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCx71EnfXyvIt_AxGXaenuz0w_Rsrvy2rU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "447775354482-i17uma919r2nkpcmk5uv2op8vig0vsmg.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "447775354482-0flf5vu6v41tkag40n1icbe9p03d54ni.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.app.beautonomi"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

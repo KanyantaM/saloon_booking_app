@@ -1,7 +1,9 @@
 import 'package:beautonomi/blocs/crud/baber/baber_bloc.dart';
 import 'package:beautonomi/blocs/crud/baber/baber_state.dart';
 import 'package:beautonomi/model/ui_model/home_screen_model.dart';
+import 'package:beautonomi/screens/location_search_map.dart';
 import 'package:beautonomi/utilites/constants.dart';
+import 'package:beautonomi/utilites/helper.dart';
 import 'package:beautonomi/utilites/location/finding_user.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -30,23 +32,24 @@ class _HomeScreenState extends State<HomeScreen> {
   late BranchBloc _branchBloc;
   PageController controller = PageController();
   ScrollController hideScrollCtr = ScrollController();
-  int _selectedCategoryIndex=-1;
+  int _selectedCategoryIndex = -1;
   String _filter = '';
 
-  void _updateFilter(String category){
+  void _updateFilter(String category) {
     setState(() {
       _filter = category;
     });
   }
 
-  void _handleCategoryClicked(int index){
+  void _handleCategoryClicked(int index) {
     setState(() {
-      if(_selectedCategoryIndex == index){
+      if (_selectedCategoryIndex == index) {
         _selectedCategoryIndex = -1;
-      }else{_selectedCategoryIndex = index;}
+      } else {
+        _selectedCategoryIndex = index;
+      }
     });
   }
-
 
   @override
   void initState() {
@@ -103,17 +106,29 @@ class _HomeScreenState extends State<HomeScreen> {
                                   return const CircularProgressIndicator();
                                 } else if (snapshot.hasError) {
                                   // If an error occurs while fetching the location, you can handle it here
-                                  return Text("Error: ${snapshot.error}");
+                                  return InkWell(
+                                    child: Text("Error: ${snapshot.error}"),
+                                    onTap: () {
+                                      Helper.toScreen(
+                                          context, const MapScreen());
+                                    },
+                                  );
                                 } else {
                                   // If the future has completed successfully, you can use the data in the UI
                                   final location =
                                       snapshot.data ?? "Unknown Location";
-                                  return CustomText(
-                                    title: location,
-                                    color: kMainColor,
-                                    fontSize: 14.h,
-                                    fontWeight: FontWeight.w500,
-                                    maxLines: 1,
+                                  return InkWell(
+                                    child: CustomText(
+                                      title: location,
+                                      color: kMainColor,
+                                      fontSize: 14.h,
+                                      fontWeight: FontWeight.w500,
+                                      maxLines: 1,
+                                    ),
+                                    onTap: () {
+                                      Helper.toScreen(
+                                          context, const MapScreen());
+                                    },
                                   );
                                 }
                               },
@@ -261,48 +276,58 @@ class _HomeScreenState extends State<HomeScreen> {
                     SizedBox(
                       height: 20.h,
                     ),
-                    FutureBuilder(future: getCategoriesFromFirestore(),
-                    builder: ((context, snapshot) {
-                      if(snapshot.connectionState == ConnectionState.waiting){
-                        return const Center(child: CircularProgressIndicator(),);
-                      } else if(snapshot.hasError){
-                        return const Text('error');
-                      } else if(snapshot.hasData){
-                        List<CateGory> categoryList = snapshot.data!;
-                        return ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        physics: const ClampingScrollPhysics(),
-                        shrinkWrap: true,
-                        padding: const EdgeInsets.symmetric(horizontal: 6),
-                        itemCount: categoryList.length,
-                        itemBuilder: (context, index) {
-                          return Container(
-                              margin: const EdgeInsets.only(left: 15),
-                              child: InkWell(
-                                onTap:(){
-                                  _handleCategoryClicked(index);
-                                  if(_selectedCategoryIndex == index){
-                                    _updateFilter(categoryList[index].title);
-                                  }
-                                },
-                                child: CategoryWidget(
-                                  cateGoryModel: categoryList[index], index: index, isSelected: _selectedCategoryIndex==index,
-                                ),
-                              ));
-                        },
-                      );
-                      } else {
-                        return const Text('No data');
-                      }
-                    })),
-                    
+                    FutureBuilder(
+                        future: getCategoriesFromFirestore(),
+                        builder: ((context, snapshot) {
+                          if (snapshot.connectionState ==
+                              ConnectionState.waiting) {
+                            return const Center(
+                              child: CircularProgressIndicator(),
+                            );
+                          } else if (snapshot.hasError) {
+                            return const Text('error');
+                          } else if (snapshot.hasData) {
+                            List<CateGory> categoryList = snapshot.data!;
+                            return ListView.builder(
+                              scrollDirection: Axis.horizontal,
+                              physics: const ClampingScrollPhysics(),
+                              shrinkWrap: true,
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 6),
+                              itemCount: categoryList.length,
+                              itemBuilder: (context, index) {
+                                return Container(
+                                    margin: const EdgeInsets.only(left: 15),
+                                    child: InkWell(
+                                      onTap: () {
+                                        _handleCategoryClicked(index);
+                                        if (_selectedCategoryIndex == index) {
+                                          _updateFilter(
+                                              categoryList[index].title);
+                                        }
+                                      },
+                                      child: CategoryWidget(
+                                        cateGoryModel: categoryList[index],
+                                        index: index,
+                                        isSelected:
+                                            _selectedCategoryIndex == index,
+                                      ),
+                                    ));
+                              },
+                            );
+                          } else {
+                            return const Text('No data');
+                          }
+                        })),
                     SizedBox(
                       height: 20.h,
                     ),
                     Container(
                       margin: const EdgeInsets.symmetric(horizontal: 20),
                       child: CustomText(
-                        title: _filter == ''? "Top Specialists" : '$_filter specialists',
+                        title: _filter == ''
+                            ? "Top Specialists"
+                            : '$_filter specialists',
                         // "Main Branch",
                         color: kBlackColor,
                         fontSize: 17.h,
@@ -324,41 +349,44 @@ class _HomeScreenState extends State<HomeScreen> {
                           } else if (state is ErrorState) {
                             return Center(child: Text(state.message));
                           } else if (state is BaberLoadedState) {
-                            if(_filter != ''){
-                              List<Baber> filteredList = state.babers.where((baber) => baber.services.keys.toList().contains(_filter)).toList();
+                            if (_filter != '') {
+                              List<Baber> filteredList = state.babers
+                                  .where((baber) => baber.services.keys
+                                      .toList()
+                                      .contains(_filter))
+                                  .toList();
                               ListView.builder(
-                              scrollDirection: Axis.horizontal,
-                              physics: const ClampingScrollPhysics(),
-                              shrinkWrap: true,
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 6),
-                              itemCount: state.babers.length,
-                              itemBuilder: (context, index) {
-                                Baber baber = filteredList[index];
-                                //getting the price list
-                                List<double> prices =
-                                    baber.services.values.toList();
-                                //finding the minimum value in the list
-                                double minPrice = prices.reduce(
-                                    (value, element) =>
-                                        value < element ? value : element);
-                                return Container(
-                                  margin: const EdgeInsets.only(left: 15),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: TopSpecialistWidget(
-                                      baber:baber,
-                                      minCost: minPrice,
-                                      distance: getDistanceBetweenCoordinates(
-                                          branchState.currentLocation,
-                                          branchState.destination),
+                                scrollDirection: Axis.horizontal,
+                                physics: const ClampingScrollPhysics(),
+                                shrinkWrap: true,
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 6),
+                                itemCount: state.babers.length,
+                                itemBuilder: (context, index) {
+                                  Baber baber = filteredList[index];
+                                  //getting the price list
+                                  List<double> prices =
+                                      baber.services.values.toList();
+                                  //finding the minimum value in the list
+                                  double minPrice = prices.reduce(
+                                      (value, element) =>
+                                          value < element ? value : element);
+                                  return Container(
+                                    margin: const EdgeInsets.only(left: 15),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: TopSpecialistWidget(
+                                        baber: baber,
+                                        minCost: minPrice,
+                                        distance: getDistanceBetweenCoordinates(
+                                            branchState.currentLocation,
+                                            branchState.destination),
+                                      ),
                                     ),
-                                  ),
-                                );
-                              },
-                            );
-                          
-                            } 
+                                  );
+                                },
+                              );
+                            }
                             return ListView.builder(
                               scrollDirection: Axis.horizontal,
                               physics: const ClampingScrollPhysics(),

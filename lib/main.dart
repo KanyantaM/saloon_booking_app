@@ -1,3 +1,4 @@
+import 'package:beautonomi/firebase_options.dart';
 import 'package:beautonomi/screens/auth/auth_screen.dart';
 import 'package:beautonomi/screens/home_screen/home_screen.dart';
 import 'package:beautonomi/utilites/constants.dart';
@@ -15,7 +16,7 @@ import 'data/repositories/auth_repository.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase
-      .initializeApp(); // Will initialize Firebase in your application
+      .initializeApp(options: DefaultFirebaseOptions.currentPlatform,); // Will initialize Firebase in your application
   SystemChrome.setSystemUIOverlayStyle(
       const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
   runApp(const MyApp());
