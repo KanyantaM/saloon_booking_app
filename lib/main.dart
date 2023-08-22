@@ -1,3 +1,5 @@
+import 'package:beautonomi/blocs/branches/branch_bloc.dart';
+import 'package:beautonomi/blocs/crud/baber/baber_bloc.dart';
 import 'package:beautonomi/firebase_options.dart';
 import 'package:beautonomi/screens/auth/auth_screen.dart';
 import 'package:beautonomi/screens/home_screen/home_screen.dart';
@@ -49,6 +51,8 @@ class MyAppState extends State<MyApp> {
           create: ((context) => AuthBloc(
               authRepository: RepositoryProvider.of<AuthRepository>(context))),
         ),
+        BlocProvider(create: ((context)=>BaberBloc())),
+        BlocProvider(create: ((context)=>BranchBloc())),
         // Add more BlocProviders as needed
       ],
       child: ScreenUtilInit(
