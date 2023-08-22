@@ -13,11 +13,11 @@ class TopSpecialistWidget extends StatelessWidget {
     super.key,
     required this.baber,
     required this.minCost,
-    required this.distance,
+    this.distance,
   });
   final Baber baber;
   final double minCost;
-  final double distance;
+  final double? distance;
 
   @override
   Widget build(BuildContext context) { 
@@ -235,7 +235,7 @@ class TopSpecialistWidget extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           CustomText(
-                            title: '$distance km',
+                            title: (distance!>0)? '$distance km': null,
                             color: kBlackColor,
                             fontSize: 12.h,
                             fontWeight: FontWeight.w600,

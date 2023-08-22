@@ -6,33 +6,17 @@ abstract class BranchState extends Equatable {
   List<Object?> get props => [];
 }
 
-class BranchInitialState extends BranchState {}
+class LocationsInitialState extends BranchState {}
 
-class UseCurrentLocationState extends BranchState{
-  
-  @override
-  List<Object?> get props => [];
-}
-
-class DontUseCurrentLocationState extends BranchState{
-  
-  @override
-  List<Object?> get props => [];
-}
-
-class BranchUpdatedState extends BranchState {
-  final LatLng currentLocation;
+class LocationLoadedState extends BranchState{
+  final LatLng userLocation;
   final LatLng destination;
-  final Set<Marker> markers;
-  final Set<Polyline> polylines;
+  final String destinationName;
 
-  BranchUpdatedState({
-    required this.currentLocation,
-    required this.destination,
-    required this.markers,
-    required this.polylines,
-  });
+  LocationLoadedState({required this.userLocation, required this.destination, required this.destinationName});
+
+  
 
   @override
-  List<Object?> get props => [currentLocation, destination, markers, polylines];
+  List<Object?> get props => [ destination, destinationName, userLocation];
 }

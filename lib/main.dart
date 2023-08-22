@@ -12,11 +12,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'blocs/auth/auth_bloc.dart';
 import 'data/repositories/auth_repository.dart';
 
-
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase
-      .initializeApp(options: DefaultFirebaseOptions.currentPlatform,); // Will initialize Firebase in your application
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  ); // Will initialize Firebase in your application
   SystemChrome.setSystemUIOverlayStyle(
       const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
   runApp(const MyApp());
@@ -40,38 +40,42 @@ class MyAppState extends State<MyApp> {
       providers: [
         RepositoryProvider<AuthRepository>(
           create: (context) => AuthRepository(),
-          child: BlocProvider(
-            create: ((context) => AuthBloc(
-                authRepository:
-                    RepositoryProvider.of<AuthRepository>(context))),
-          ),
+          //child: BlocProvider(
+          //create: ((context) => AuthBloc(
+          //  authRepository:
+          //    RepositoryProvider.of<AuthRepository>(context))),
+        ),
+        BlocProvider(
+          create: ((context) => AuthBloc(
+              authRepository: RepositoryProvider.of<AuthRepository>(context))),
         ),
         // Add more BlocProviders as needed
       ],
       child: ScreenUtilInit(
         builder: (BuildContext context, Widget? child) {
           return MaterialApp(
-            title: "Hair by levy",
-            theme: ThemeData(
-              splashColor: kMainColor,
-              unselectedWidgetColor: kSecondaryColor,
-              scaffoldBackgroundColor: kMainColor,
-              fontFamily: "Poppins",
-              primaryColor: const Color(0xff1D2D61),
-              colorScheme:
-                  ColorScheme.fromSwatch().copyWith(secondary: kMainColor),
-            ),
-            debugShowMaterialGrid: false,
-            debugShowCheckedModeBanner: false,
-            home: StreamBuilder<User?>(stream: FirebaseAuth.instance.authStateChanges(),
-            builder: ((context, snapshot) {
-              if(snapshot.hasData){
-                return const HomeScreen();
-              } else{
-                return const AuthScreen();
-              }
-            }),) 
-          );
+              title: "Hair by levy",
+              theme: ThemeData(
+                splashColor: kMainColor,
+                unselectedWidgetColor: kSecondaryColor,
+                scaffoldBackgroundColor: kMainColor,
+                fontFamily: "Poppins",
+                primaryColor: const Color(0xff1D2D61),
+                colorScheme:
+                    ColorScheme.fromSwatch().copyWith(secondary: kMainColor),
+              ),
+              debugShowMaterialGrid: false,
+              debugShowCheckedModeBanner: false,
+              home: StreamBuilder<User?>(
+                stream: FirebaseAuth.instance.authStateChanges(),
+                builder: ((context, snapshot) {
+                  if (snapshot.hasData) {
+                    return const HomeScreen();
+                  } else {
+                    return const AuthScreen();
+                  }
+                }),
+              ));
         },
         designSize: const Size(428, 926),
       ),
