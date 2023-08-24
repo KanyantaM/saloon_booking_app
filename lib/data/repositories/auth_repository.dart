@@ -63,4 +63,10 @@ class AuthRepository{
     }
   }
 
+  bool signInSuccessfull(){
+    if(_firebaseAuth.currentUser == null || _firebaseAuth.currentUser!.isAnonymous) {
+      return false;
+    }
+    return true;
+  }
 }

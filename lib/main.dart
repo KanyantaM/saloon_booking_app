@@ -1,4 +1,5 @@
 import 'package:beautonomi/blocs/branches/branch_bloc.dart';
+import 'package:beautonomi/blocs/booking/booking_bloc.dart';
 import 'package:beautonomi/blocs/crud/baber/baber_bloc.dart';
 import 'package:beautonomi/firebase_options.dart';
 import 'package:beautonomi/screens/auth/auth_screen.dart';
@@ -53,6 +54,7 @@ class MyAppState extends State<MyApp> {
         ),
         BlocProvider(create: ((context)=>BaberBloc())),
         BlocProvider(create: ((context)=>BranchBloc())),
+        BlocProvider(create: ((context) => BookingBloc())) 
         // Add more BlocProviders as needed
       ],
       child: ScreenUtilInit(
