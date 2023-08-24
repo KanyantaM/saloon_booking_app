@@ -66,7 +66,7 @@ class MyAppState extends State<MyApp> {
                 unselectedWidgetColor: kSecondaryColor,
                 scaffoldBackgroundColor: kMainColor,
                 fontFamily: "Poppins",
-                primaryColor: const Color(0xff1D2D61),
+                primaryColor: const Color(0xff1D2D61), 
                 colorScheme:
                     ColorScheme.fromSwatch().copyWith(secondary: kMainColor),
               ),
