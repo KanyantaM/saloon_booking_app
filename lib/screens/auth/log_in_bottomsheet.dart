@@ -51,7 +51,7 @@ class _SignInBottomSheetState extends State<SignInBottomSheet> {
           title: Center(
             child: Container(
               margin: const EdgeInsets.only(right: 40),
-              child:const CustomText(
+              child: const CustomText(
                 title: "SignIn",
                 color: kBlackColor,
                 fontSize: 18,
@@ -125,26 +125,32 @@ class _SignInBottomSheetState extends State<SignInBottomSheet> {
                     SizedBox(
                       height: 25.h,
                     ),
-                    CustomButton(
-                      btnHeight: 51.h,
-                      onPressed: () {
-                        try {
-                          _authenticateWithEmailAndPassword(context);
-                          Helper.toScreen(
-                              context, const BottomNavigationScreen());
-                        } catch (e) {
-                          SnackBar(
-                            content:
-                                Text('An unexpected error occurred: \n $e'),
-                          );
-                        }
+                    BlocBuilder<AuthBloc, AuthState>(
+                      builder: (context, state) {
+                        return CustomButton(
+                          btnHeight: 51.h,
+                          onPressed: () {
+                            try {
+                              _authenticateWithEmailAndPassword(context);
+                              if (state is Authenticated) {
+                                Helper.toScreen(
+                                    context, const BottomNavigationScreen());
+                              }
+                            } catch (e) {
+                              SnackBar(
+                                content:
+                                    Text('An unexpected error occurred: \n $e'),
+                              );
+                            }
+                          },
+                          btnColor: kSecondaryColor,
+                          title: "Sign In",
+                          textColor: kMainColor,
+                          fontWeight: FontWeight.w400,
+                          fontSize: 15,
+                          btnRadius: 10,
+                        );
                       },
-                      btnColor: kSecondaryColor,
-                      title: "Sign In",
-                      textColor: kMainColor,
-                      fontWeight: FontWeight.w400,
-                      fontSize: 15,
-                      btnRadius: 10,
                     ),
                     SizedBox(
                       height: 34.h,
@@ -187,9 +193,12 @@ class _SignInBottomSheetState extends State<SignInBottomSheet> {
                             icon: "assets/facebook.png",
                             onPressed: () {}),
                         CustomButtonLoginWidget(
-                            title: "Google",
-                            icon: "assets/google (1).png",
-                            onPressed: (){_authenticateWithGoogle(context);},),
+                          title: "Google",
+                          icon: "assets/google (1).png",
+                          onPressed: () {
+                            _authenticateWithGoogle(context);
+                          },
+                        ),
                       ],
                     )
                   ],

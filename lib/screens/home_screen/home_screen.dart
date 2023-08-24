@@ -101,7 +101,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                   if (snapshot.connectionState ==
                                       ConnectionState.waiting) {
                                     // While waiting for the future to complete, you can show a loading indicator
-                                    return const CircularProgressIndicator();
+                                    return InkWell(
+                                      child: const CircularProgressIndicator(),
+                                      onTap: () {
+                                        Helper.toScreen(
+                                            context, const MapScreen());
+                                      },
+                                    );
                                   } else if (snapshot.hasError) {
                                     // If an error occurs while fetching the location, you can handle it here
                                     return InkWell(
@@ -285,6 +291,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       } else if (snapshot.hasError) {
                         return const Text('error');
                       } else if (snapshot.hasData) {
+                        if (snapshot.data == null) {
+                          return const Text('No data found');
+                        }
                         List<CateGory> categoryList = snapshot.data!;
                         return ListView.builder(
                           scrollDirection: Axis.horizontal,

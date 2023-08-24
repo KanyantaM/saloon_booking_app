@@ -3,7 +3,6 @@ import 'package:beautonomi/blocs/booking/booking_bloc.dart';
 import 'package:beautonomi/blocs/crud/baber/baber_bloc.dart';
 import 'package:beautonomi/firebase_options.dart';
 import 'package:beautonomi/screens/auth/auth_screen.dart';
-import 'package:beautonomi/screens/home_screen/home_screen.dart';
 import 'package:beautonomi/utilites/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -13,6 +12,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'blocs/auth/auth_bloc.dart';
+import 'bottom_navigation/bottom_try.dart';
 import 'data/repositories/auth_repository.dart';
 
 Future<void> main() async {
@@ -76,7 +76,7 @@ class MyAppState extends State<MyApp> {
                 stream: FirebaseAuth.instance.authStateChanges(),
                 builder: ((context, snapshot) {
                   if (snapshot.hasData) {
-                    return const HomeScreen();
+                    return const BottomNavigationScreen();
                   } else {
                     return const AuthScreen();
                   }
