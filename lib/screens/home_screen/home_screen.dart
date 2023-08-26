@@ -19,6 +19,7 @@ import '../../widget/custom_text.dart';
 import '../../widget/main_branch_widget.dart';
 import '../../widget/main_work_widget.dart';
 import '../../widget/top_special_list_widget.dart';
+import '../../widget/no_data_cuate.dart';
 import '../location_search_and_map.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -137,7 +138,18 @@ class _HomeScreenState extends State<HomeScreen> {
                                   }
                                 },
                               )
-                            : const Center(child: CircularProgressIndicator())),
+                            : InkWell(
+                                child: CustomText(
+                                  title: 'Find the nearest Branch to you',
+                                  color: kMainColor,
+                                  fontSize: 14.h,
+                                  fontWeight: FontWeight.w500,
+                                  maxLines: 1,
+                                ),
+                                onTap: () {
+                                  Helper.toScreen(context, const MapScreen());
+                                },
+                              )),
                   ],
                 ),
               ),
@@ -320,7 +332,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           },
                         );
                       } else {
-                        return const Text('No data');
+                        return const NoDataCuate(issue: 'No Babers Found');
                       }
                     })),
                 SizedBox(

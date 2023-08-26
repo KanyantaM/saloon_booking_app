@@ -18,15 +18,17 @@ class AuthRepository{
     }
   }
 
-  Future<void> signIn({required String email, required String password}) async{
+  Future<bool> signIn({required String email, required String password}) async{
     try{
       await FirebaseAuth.instance.signInWithEmailAndPassword(email: email, password: password);
+      return true;
     } on FirebaseAuthException catch(e) {
       if (e.code == 'user-not-found'){
         throw Exception('No user found for that email');
       } else if(e.code == 'wrong-password'){
         throw Exception('Password does not match email');
       }
+      return false;
     }
   }
 
@@ -47,7 +49,7 @@ class AuthRepository{
     } catch(e){
       throw Exception(e.toString());
     }
-  }
+  } 
   Future<void> signInWithFacebook() async{
     try{
       //TODO: Sign in with Facebook
@@ -64,9 +66,7 @@ class AuthRepository{
   }
 
   bool signInSuccessfull(){
-    if(_firebaseAuth.currentUser == null || _firebaseAuth.currentUser!.isAnonymous) {
-      return false;
-    }
-    return true;
+    bool status = _firebaseAuth.currentUser == null &&  _firebaseAuth.currentUser!.isAnonymous;
+    return status;
   }
 }

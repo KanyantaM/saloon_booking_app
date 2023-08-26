@@ -3,11 +3,9 @@ import 'package:beautonomi/blocs/crud/my_bookings/my_bookings_bloc.dart';
 import 'package:beautonomi/blocs/crud/my_bookings/my_bookings_events.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../utilites/constants.dart';
 import '../../../widget/booking_card.dart';
-import '../../../widget/custom_text.dart';
+import '../../../widget/no_data_cuate.dart';
 
 class AllTabScreen extends StatelessWidget {
   const AllTabScreen({Key? key, required this.screen}) : super(key: key);
@@ -20,7 +18,7 @@ class AllTabScreen extends StatelessWidget {
       if (state is AllMyBookingInitialState) {
         BlocProvider.of<MyBookingBloc>(context).add(FetchAllBookingsEvent(type: screen));
         return const Center(
-          child: Text('Fetching Bookigns'),
+          child: Text('Fetching Bookings'),
         );
       } else if (state is AllMyBookingLoadingState) {
         return const Center(
@@ -28,24 +26,7 @@ class AllTabScreen extends StatelessWidget {
         );
       } else if (state is AllMyBookingLoadedState) {
         if (state.appoinents.isEmpty) {
-          return Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Image.asset(
-                "assets/No data-cuate.png",
-                height: 177.h,
-              ),
-              SizedBox(
-                height: 30.h,
-              ),
-              const CustomText(
-                title: "No Bookings found!",
-                fontSize: 20,
-                fontWeight: FontWeight.w500,
-                color: kBlackColor,
-              ),
-            ],
-          );
+          return const NoDataCuate(issue:'No bookings found');
         } else {
           return ListView.builder(
             itemBuilder: (context, index) {
@@ -62,10 +43,9 @@ class AllTabScreen extends StatelessWidget {
           );
         }
       } else {
-        return const Center(
-          child: Text('Can\'t Fetch Bookigns'),
-        );
+        return const NoDataCuate(issue: 'Couldn\'t find any bookings');
       }
     });
   }
 }
+

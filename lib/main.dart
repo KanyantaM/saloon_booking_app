@@ -1,6 +1,7 @@
 import 'package:beautonomi/blocs/branches/branch_bloc.dart';
 import 'package:beautonomi/blocs/booking/booking_bloc.dart';
 import 'package:beautonomi/blocs/crud/baber/baber_bloc.dart';
+import 'package:beautonomi/blocs/crud/my_bookings/my_bookings_bloc.dart';
 import 'package:beautonomi/firebase_options.dart';
 import 'package:beautonomi/screens/auth/auth_screen.dart';
 import 'package:beautonomi/utilites/constants.dart';
@@ -12,7 +13,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'blocs/auth/auth_bloc.dart';
-import 'bottom_navigation/bottom_try.dart';
 import 'data/repositories/auth_repository.dart';
 
 Future<void> main() async {
@@ -52,9 +52,10 @@ class MyAppState extends State<MyApp> {
           create: ((context) => AuthBloc(
               authRepository: RepositoryProvider.of<AuthRepository>(context))),
         ),
-        BlocProvider(create: ((context)=>BaberBloc())),
-        BlocProvider(create: ((context)=>BranchBloc())),
-        BlocProvider(create: ((context) => BookingBloc())) 
+        BlocProvider(create: ((context) => BaberBloc())),
+        BlocProvider(create: ((context) => BranchBloc())),
+        BlocProvider(create: ((context) => BookingBloc())),
+        BlocProvider(create: ((context) => MyBookingBloc())),
         // Add more BlocProviders as needed
       ],
       child: ScreenUtilInit(
@@ -66,7 +67,7 @@ class MyAppState extends State<MyApp> {
                 unselectedWidgetColor: kSecondaryColor,
                 scaffoldBackgroundColor: kMainColor,
                 fontFamily: "Poppins",
-                primaryColor: const Color(0xff1D2D61), 
+                primaryColor: const Color(0xff1D2D61),
                 colorScheme:
                     ColorScheme.fromSwatch().copyWith(secondary: kMainColor),
               ),
@@ -76,7 +77,7 @@ class MyAppState extends State<MyApp> {
                 stream: FirebaseAuth.instance.authStateChanges(),
                 builder: ((context, snapshot) {
                   if (snapshot.hasData) {
-                    return const BottomNavigationScreen();
+                    return const AuthScreen();
                   } else {
                     return const AuthScreen();
                   }
