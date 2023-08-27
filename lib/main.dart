@@ -79,7 +79,7 @@ class MyAppState extends State<MyApp> {
                   if (snapshot.hasData) {
                     return const AuthScreen();
                   } else {
-                    return const AuthScreen();
+                    return const AuthScreen(); 
                   }
                 }),
               ));
